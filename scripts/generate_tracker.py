@@ -41,8 +41,12 @@ def main():
                 raw_name = match.group(2)
                 problem_name = raw_name.replace("_", " ")
                 
-                # Parent folder name is the Topic
-                topic = os.path.basename(root)
+                # Parent folder name is the Topic. Handle nested Md/ folders.
+                parts = root.replace("\\", "/").split("/")
+                if parts[-1] in ("Md", "Code", "Miscellaneous"):
+                    topic = parts[-2]
+                else:
+                    topic = parts[-1]
                 
                 # Check for difficulty in file
                 full_path = os.path.join(root, file)
