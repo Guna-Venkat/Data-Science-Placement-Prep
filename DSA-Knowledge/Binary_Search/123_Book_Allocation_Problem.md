@@ -1,65 +1,55 @@
 # Book Allocation Problem
 
-## Topic
-Binary Search
+**Pattern:** Binary Search on Answer (Minimax Search Space)
 
-## Difficulty
-Hard
+**Recognition:**
+- Allocate contiguous items (books/tasks) to a fixed number of workers (students) such that the maximum allocation to any worker is minimized.
+- Array elements represent size/workload.
+- The bounds of search space are `low = max(arr)` (min capacity required to assign the largest single book) and `high = sum(arr)` (max capacity when all books are assigned to one student).
 
-## Pattern
-<!-- e.g. Hashing / Sliding Window / Binary Search on Answer / BFS / DFS / DP / Monotonic Stack / Greedy -->
-
-## Recognition Clues
-<!-- How would you identify this pattern in an interview? -->
--
-
-## Problem Link
-<!-- Paste the LeetCode / GFG / takeUforward link here -->
-
-## Brute Force
-**Idea:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Approach
-**Key Insight:**
-
-**Step-by-step reasoning:**
-
-**Why it works:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Code
+**Optimal Code (Python):**
 ```python
-# Clean, production-quality implementation goes here
+def findPages(arr: list[int], n: int, m: int) -> int:
+    # If there are fewer books than students, allocation is impossible
+    if m > n:
+        return -1
+        
+    def getRequiredStudents(max_allowed_pages: int) -> int:
+        students = 1
+        pages_allocated = 0
+        
+        for pages in arr:
+            if pages_allocated + pages > max_allowed_pages:
+                # Assign to the next student
+                students += 1
+                pages_allocated = pages
+            else:
+                pages_allocated += pages
+                
+        return students
+
+    low = max(arr)
+    high = sum(arr)
+    ans = -1
+    
+    while low <= high:
+        mid = (low + high) // 2
+        required_students = getRequiredStudents(mid)
+        
+        if required_students <= m:
+            ans = mid
+            high = mid - 1  # Attempt to find a smaller maximum workload
+        else:
+            low = mid + 1   # Increase page limit to reduce student count
+            
+    return ans
 ```
 
-## Common Mistakes
--
+**Killer Edge:**
+- Number of students `m` exceeds number of books `n` (edge check returns `-1`).
+- All books have identical page counts.
+- `m = 1` (returns the sum of all pages).
 
-## Killer Edge Cases
--
-
-## Follow-Up Variants
-<!-- Store only the delta logic vs. this problem, not full duplicate solutions -->
--
-
-## Similar Problems
--
-
-## Theory Connections
-<!-- Useful for GATE / deeper understanding -->
--
-
-## Confidence Level
-<!-- 0 = Never Solved | 1 = Solved After Solution | 2 = Solved With Hint
-     3 = Solved Independently | 4 = Can Explain | 5 = Can Re-Derive Months Later -->
-
-
-## Revision History
-| Date | Status | Notes |
-|------|--------|-------|
-|      |        |       |
+**Mistake:**
+- Initializing `low = 0` or `low = 1` instead of `low = max(arr)`. Setting it too low allows the binary search to try values where a student cannot even be allocated the largest single book, breaking the logic.
+- Miscalculating student count when transitioning: resetting `pages_allocated = 0` instead of `pages_allocated = pages` when moving to the next student.

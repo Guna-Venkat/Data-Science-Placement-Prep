@@ -1,65 +1,34 @@
-# Best time to buy and sell stock
+# Best Time to Buy and Sell Stock
 
-## Topic
-Dynamic Programming
+**Pattern:** Linear Scan / Single Pass (Greedy / DP Variant)
 
-## Difficulty
-Medium
+**Recognition:**
+- Find maximum profit from buying on one day and selling on a future day.
+- Single transaction allowed.
+- Keep track of the minimum price observed so far and check potential profit at each step.
 
-## Pattern
-<!-- e.g. Hashing / Sliding Window / Binary Search on Answer / BFS / DFS / DP / Monotonic Stack / Greedy -->
-
-## Recognition Clues
-<!-- How would you identify this pattern in an interview? -->
--
-
-## Problem Link
-<!-- Paste the LeetCode / GFG / takeUforward link here -->
-
-## Brute Force
-**Idea:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Approach
-**Key Insight:**
-
-**Step-by-step reasoning:**
-
-**Why it works:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Code
+**Optimal Code (Python):**
 ```python
-# Clean, production-quality implementation goes here
+def maxProfit(prices: list[int]) -> int:
+    if not prices:
+        return 0
+        
+    max_profit = 0
+    min_price = prices[0]
+    
+    for price in prices:
+        min_price = min(min_price, price)
+        profit = price - min_price
+        max_profit = max(max_profit, profit)
+        
+    return max_profit
 ```
 
-## Common Mistakes
--
+**Killer Edge:**
+- Prices are in strictly decreasing order (e.g., `[7, 6, 5, 4, 3, 1]`) -> returns `0`.
+- Array has a single element -> returns `0` (cannot buy and sell on the same day).
+- All identical prices.
 
-## Killer Edge Cases
--
-
-## Follow-Up Variants
-<!-- Store only the delta logic vs. this problem, not full duplicate solutions -->
--
-
-## Similar Problems
--
-
-## Theory Connections
-<!-- Useful for GATE / deeper understanding -->
--
-
-## Confidence Level
-<!-- 0 = Never Solved | 1 = Solved After Solution | 2 = Solved With Hint
-     3 = Solved Independently | 4 = Can Explain | 5 = Can Re-Derive Months Later -->
-
-
-## Revision History
-| Date | Status | Notes |
-|------|--------|-------|
-|      |        |       |
+**Mistake:**
+- Selling a stock before buying it (buying at a future index and selling at a past index).
+- Initializing `min_price` to `0` (if price values are positive, `0` will never be updated and profit will be calculated incorrectly).

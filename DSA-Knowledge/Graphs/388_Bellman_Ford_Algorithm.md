@@ -1,65 +1,40 @@
-# Bellman Ford Algorithm
+# Bellman-Ford Algorithm
 
-## Topic
-Graphs
+**Pattern:** Graph Shortest Path (Dynamic Programming / Edge Relaxation)
 
-## Difficulty
-Medium
+**Recognition:**
+- Find shortest paths from a single source in a weighted graph containing negative edge weights.
+- Detect the presence of negative weight cycles.
+- Principal property: in a graph with `V` vertices, the shortest path between any two vertices can contain at most `V - 1` edges.
 
-## Pattern
-<!-- e.g. Hashing / Sliding Window / Binary Search on Answer / BFS / DFS / DP / Monotonic Stack / Greedy -->
-
-## Recognition Clues
-<!-- How would you identify this pattern in an interview? -->
--
-
-## Problem Link
-<!-- Paste the LeetCode / GFG / takeUforward link here -->
-
-## Brute Force
-**Idea:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Approach
-**Key Insight:**
-
-**Step-by-step reasoning:**
-
-**Why it works:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Code
+**Optimal Code (Python):**
 ```python
-# Clean, production-quality implementation goes here
+def bellmanFord(V: int, edges: list[list[int]], S: int) -> list[int]:
+    # edges list elements are: [u, v, weight]
+    # Initialize distances. Using 1e8 as infinity per standard competitive programming conventions.
+    dist = [int(1e8)] * V
+    dist[S] = 0
+    
+    # Relax all edges V - 1 times
+    for _ in range(V - 1):
+        for u, v, w in edges:
+            if dist[u] != int(1e8) and dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                
+    # Check for negative weight cycles by relaxing edges one more time
+    for u, v, w in edges:
+        if dist[u] != int(1e8) and dist[u] + w < dist[v]:
+            # A negative cycle exists if we can still find a shorter path
+            return [-1]
+            
+    return dist
 ```
 
-## Common Mistakes
--
+**Killer Edge:**
+- Graph contains a negative cycle reachable from the source S (returns `[-1]`).
+- Source node is part of a disconnected component but other components contain negative cycles.
+- Vertices with infinite distances (must not relax their outgoing edges).
 
-## Killer Edge Cases
--
-
-## Follow-Up Variants
-<!-- Store only the delta logic vs. this problem, not full duplicate solutions -->
--
-
-## Similar Problems
--
-
-## Theory Connections
-<!-- Useful for GATE / deeper understanding -->
--
-
-## Confidence Level
-<!-- 0 = Never Solved | 1 = Solved After Solution | 2 = Solved With Hint
-     3 = Solved Independently | 4 = Can Explain | 5 = Can Re-Derive Months Later -->
-
-
-## Revision History
-| Date | Status | Notes |
-|------|--------|-------|
-|      |        |       |
+**Mistake:**
+- Relaxing edges outgoing from vertices with distance infinity (`dist[u] == 1e8`). If `w` is negative, `inf + w` becomes less than `inf`, which is incorrect.
+- Running the relaxation outer loop only $V-2$ times or cycle check immediately inside the loop.

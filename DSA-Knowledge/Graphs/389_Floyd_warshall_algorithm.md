@@ -1,65 +1,43 @@
-# Floyd warshall algorithm
+# Floyd-Warshall Algorithm
 
-## Topic
-Graphs
+**Pattern:** Graph All-Pairs Shortest Path (Dynamic Programming)
 
-## Difficulty
-Medium
+**Recognition:**
+- Find shortest paths between all pairs of vertices in a weighted directed graph.
+- Handles negative edge weights (unlike Dijkstra) but not negative cycles.
+- Small number of vertices ($V \le 400$), allowing for $O(V^3)$ time complexity.
 
-## Pattern
-<!-- e.g. Hashing / Sliding Window / Binary Search on Answer / BFS / DFS / DP / Monotonic Stack / Greedy -->
-
-## Recognition Clues
-<!-- How would you identify this pattern in an interview? -->
--
-
-## Problem Link
-<!-- Paste the LeetCode / GFG / takeUforward link here -->
-
-## Brute Force
-**Idea:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Approach
-**Key Insight:**
-
-**Step-by-step reasoning:**
-
-**Why it works:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Code
+**Optimal Code (Python):**
 ```python
-# Clean, production-quality implementation goes here
+def floydWarshall(matrix: list[list[int]]) -> None:
+    n = len(matrix)
+    
+    # Preprocess: convert -1 (no edge) to infinity, set self-loops to 0
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] == -1:
+                matrix[i][j] = float('inf')
+            if i == j:
+                matrix[i][j] = 0
+                
+    # DP transitions: k is the intermediate vertex
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if matrix[i][k] != float('inf') and matrix[k][j] != float('inf'):
+                    matrix[i][j] = min(matrix[i][j], matrix[i][k] + matrix[k][j])
+                    
+    # Postprocess: convert infinity back to -1 for representation
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] == float('inf'):
+                matrix[i][j] = -1
 ```
 
-## Common Mistakes
--
+**Killer Edge:**
+- Presence of a negative cycle (can be detected if `matrix[i][i] < 0` for any `i` after running the algorithm).
+- Disconnected nodes with no path between them.
 
-## Killer Edge Cases
--
-
-## Follow-Up Variants
-<!-- Store only the delta logic vs. this problem, not full duplicate solutions -->
--
-
-## Similar Problems
--
-
-## Theory Connections
-<!-- Useful for GATE / deeper understanding -->
--
-
-## Confidence Level
-<!-- 0 = Never Solved | 1 = Solved After Solution | 2 = Solved With Hint
-     3 = Solved Independently | 4 = Can Explain | 5 = Can Re-Derive Months Later -->
-
-
-## Revision History
-| Date | Status | Notes |
-|------|--------|-------|
-|      |        |       |
+**Mistake:**
+- Placing the loop for the intermediate vertex `k` as the inner-most loop. The `k` loop must be the **outer-most** loop to ensure all subpaths are correctly built step-by-step.
+- Not checking if intermediate paths are unreachable (`matrix[i][k] == inf`), which could result in incorrect relaxations when subtracting negative weights.

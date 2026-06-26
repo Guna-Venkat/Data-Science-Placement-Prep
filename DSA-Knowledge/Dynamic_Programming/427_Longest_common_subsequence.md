@@ -1,65 +1,36 @@
-# Longest common subsequence
+# Longest Common Subsequence
 
-## Topic
-Dynamic Programming
+**Pattern:** Multi-dimensional Dynamic Programming (DP on Strings / Subsequences)
 
-## Difficulty
-Medium
+**Recognition:**
+- Given two sequences, find the length of the longest subsequence present in both.
+- Subsequence elements do not need to be contiguous but must preserve relative ordering.
+- Decision tree at each step: if characters match, include them; if they don't, skip one character from either string.
 
-## Pattern
-<!-- e.g. Hashing / Sliding Window / Binary Search on Answer / BFS / DFS / DP / Monotonic Stack / Greedy -->
-
-## Recognition Clues
-<!-- How would you identify this pattern in an interview? -->
--
-
-## Problem Link
-<!-- Paste the LeetCode / GFG / takeUforward link here -->
-
-## Brute Force
-**Idea:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Approach
-**Key Insight:**
-
-**Step-by-step reasoning:**
-
-**Why it works:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Code
+**Optimal Code (Python):**
 ```python
-# Clean, production-quality implementation goes here
+def lcs(s1: str, s2: str) -> int:
+    n, m = len(s1), len(s2)
+    # Space optimized: only keep track of previous and current rows
+    prev = [0] * (m + 1)
+    curr = [0] * (m + 1)
+    
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            if s1[i - 1] == s2[j - 1]:
+                curr[j] = 1 + prev[j - 1]
+            else:
+                curr[j] = max(prev[j], curr[j - 1])
+        prev = curr[:]
+        
+    return prev[m]
 ```
 
-## Common Mistakes
--
+**Killer Edge:**
+- One or both strings are empty (returns `0`).
+- No matching characters between the two strings (returns `0`).
+- Both strings are identical (returns length of the string).
 
-## Killer Edge Cases
--
-
-## Follow-Up Variants
-<!-- Store only the delta logic vs. this problem, not full duplicate solutions -->
--
-
-## Similar Problems
--
-
-## Theory Connections
-<!-- Useful for GATE / deeper understanding -->
--
-
-## Confidence Level
-<!-- 0 = Never Solved | 1 = Solved After Solution | 2 = Solved With Hint
-     3 = Solved Independently | 4 = Can Explain | 5 = Can Re-Derive Months Later -->
-
-
-## Revision History
-| Date | Status | Notes |
-|------|--------|-------|
-|      |        |       |
+**Mistake:**
+- Using 2D DP array with size $O(N \cdot M)$ when space can be optimized to $O(\min(N, M))$ by making the smaller string represent columns.
+- Mismatching indices: comparing `s1[i]` with `s2[j]` instead of `s1[i - 1]` with `s2[j - 1]` due to index shifting.

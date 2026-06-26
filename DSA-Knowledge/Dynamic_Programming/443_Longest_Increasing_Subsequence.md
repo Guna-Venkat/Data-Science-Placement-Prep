@@ -1,65 +1,40 @@
 # Longest Increasing Subsequence
 
-## Topic
-Dynamic Programming
+**Pattern:** Dynamic Programming with Binary Search (Patience Sorting)
 
-## Difficulty
-Medium
+**Recognition:**
+- Find length of the longest strictly increasing subsequence in an array.
+- $O(N^2)$ dynamic programming approach is too slow for large inputs ($N \ge 10^5$).
+- Maintain an active sorted list `sub` where `sub[i]` represents the smallest tail of all increasing subsequences of length `i+1` encountered so far.
 
-## Pattern
-<!-- e.g. Hashing / Sliding Window / Binary Search on Answer / BFS / DFS / DP / Monotonic Stack / Greedy -->
-
-## Recognition Clues
-<!-- How would you identify this pattern in an interview? -->
--
-
-## Problem Link
-<!-- Paste the LeetCode / GFG / takeUforward link here -->
-
-## Brute Force
-**Idea:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Approach
-**Key Insight:**
-
-**Step-by-step reasoning:**
-
-**Why it works:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Code
+**Optimal Code (Python):**
 ```python
-# Clean, production-quality implementation goes here
+import bisect
+
+def lengthOfLIS(nums: list[int]) -> int:
+    if not nums:
+        return 0
+        
+    sub = []
+    for num in nums:
+        # Find the insertion index for num in sub to maintain sorted order
+        idx = bisect.bisect_left(sub, num)
+        
+        # If num is greater than all elements in sub, append it
+        if idx == len(sub):
+            sub.append(num)
+        # Otherwise, replace the element at idx to optimize the tail value
+        else:
+            sub[idx] = num
+            
+    return len(sub)
 ```
 
-## Common Mistakes
--
+**Killer Edge:**
+- Array is sorted in descending order (returns `1`).
+- Array contains all duplicate values (returns `1` because we need strictly increasing).
+- Empty input.
 
-## Killer Edge Cases
--
-
-## Follow-Up Variants
-<!-- Store only the delta logic vs. this problem, not full duplicate solutions -->
--
-
-## Similar Problems
--
-
-## Theory Connections
-<!-- Useful for GATE / deeper understanding -->
--
-
-## Confidence Level
-<!-- 0 = Never Solved | 1 = Solved After Solution | 2 = Solved With Hint
-     3 = Solved Independently | 4 = Can Explain | 5 = Can Re-Derive Months Later -->
-
-
-## Revision History
-| Date | Status | Notes |
-|------|--------|-------|
-|      |        |       |
+**Mistake:**
+- Using `bisect_right` instead of `bisect_left` which would handle duplicate elements incorrectly, violating the strictly increasing requirement.
+- Confusing the `sub` array as the actual LIS subsequence. The elements in `sub` do not represent the correct LIS sequence elements, only the *length* of `sub` is correct.

@@ -1,65 +1,34 @@
-# Minimum Coins (DP-20)
+# Minimum Coins
 
-## Topic
-Dynamic Programming
+**Pattern:** Dynamic Programming (Unbounded Knapsack / Coin Change Variant)
 
-## Difficulty
-Medium
+**Recognition:**
+- Minimize the total number of items (coins) to achieve a target value.
+- Items can be reused an infinite number of times (unbounded supply).
+- Optimal substructure: the minimum coins for sum `V` depends on the minimum coins for `V - coin`.
 
-## Pattern
-<!-- e.g. Hashing / Sliding Window / Binary Search on Answer / BFS / DFS / DP / Monotonic Stack / Greedy -->
-
-## Recognition Clues
-<!-- How would you identify this pattern in an interview? -->
--
-
-## Problem Link
-<!-- Paste the LeetCode / GFG / takeUforward link here -->
-
-## Brute Force
-**Idea:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Approach
-**Key Insight:**
-
-**Step-by-step reasoning:**
-
-**Why it works:**
-
-**Time Complexity:**
-**Space Complexity:**
-
-## Optimal Code
+**Optimal Code (Python):**
 ```python
-# Clean, production-quality implementation goes here
+def minCoins(coins: list[int], V: int) -> int:
+    # dp[i] stores the minimum coins required to make change for amount i
+    dp = [float('inf')] * (V + 1)
+    dp[0] = 0  # Base case: 0 coins needed for amount 0
+    
+    for i in range(1, V + 1):
+        for coin in coins:
+            if i - coin >= 0:
+                sub_res = dp[i - coin]
+                if sub_res != float('inf'):
+                    dp[i] = min(dp[i], sub_res + 1)
+                    
+    return dp[V] if dp[V] != float('inf') else -1
 ```
 
-## Common Mistakes
--
+**Killer Edge:**
+- Target value `V` is 0 (returns `0`).
+- No combination of coins can sum up to `V` (returns `-1`).
+- Large `V` with small coin values (requires $O(V \cdot \text{len(coins)})$ time complexity).
 
-## Killer Edge Cases
--
-
-## Follow-Up Variants
-<!-- Store only the delta logic vs. this problem, not full duplicate solutions -->
--
-
-## Similar Problems
--
-
-## Theory Connections
-<!-- Useful for GATE / deeper understanding -->
--
-
-## Confidence Level
-<!-- 0 = Never Solved | 1 = Solved After Solution | 2 = Solved With Hint
-     3 = Solved Independently | 4 = Can Explain | 5 = Can Re-Derive Months Later -->
-
-
-## Revision History
-| Date | Status | Notes |
-|------|--------|-------|
-|      |        |       |
+**Mistake:**
+- Initializing DP array with a arbitrary large number (like `99999`) which can be smaller than the actual minimum coins if `V` is huge.
+- Forgetting to check if `dp[i - coin]` is valid (`float('inf')`) before adding `1`, which would conceptually result in `inf + 1`.
