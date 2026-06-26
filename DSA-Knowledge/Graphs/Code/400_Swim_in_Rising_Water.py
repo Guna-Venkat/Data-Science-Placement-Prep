@@ -1,44 +1,42 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/swim-in-rising-water/
 Problem Name: Swim in Rising Water
-Description: Problem description goes here.
+Description: Find minimal time to swim from top-left to bottom-right on grid where water level rises.
 
 Folder: Graphs
-File: 400_Swim_in_Rising_Water.md
+File: 400_Swim_in_Rising_Water.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+import heapq
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Dijkstra's keeping track of path minimax weight.
+# Time Complexity: O(N^2 log N)
+# Space Complexity: O(N^2)
+def optimal_solution(grid: list[list[int]]) -> int:
+    n = len(grid)
+    pq = [(grid[0][0], 0, 0)] # (elevation, r, c)
+    visited = {(0, 0)}
+    
+    while pq:
+        elevation, r, c = heapq.heappop(pq)
+        if r == n - 1 and c == n - 1:
+            return elevation
+            
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < n and 0 <= nc < n and (nr, nc) not in visited:
+                visited.add((nr, nc))
+                heapq.heappush(pq, (max(elevation, grid[nr][nc]), nr, nc))
+    return 0
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Swim in Rising Water...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    grid = [[0,2],[1,3]]
+    assert optimal_solution(grid) == 3
     print("Done.")

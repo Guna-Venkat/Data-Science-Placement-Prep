@@ -1,44 +1,35 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Target sum
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/target-sum/
+Problem Name: Target Sum
+Description: Assign '+' and '-' to elements to sum to target.
 
 Folder: Dynamic_Programming
-File: 423_Target_sum.md
+File: 423_Target_sum.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Equivalent to Count Partitions with Given Difference target = (sum + diff) / 2.
+# Time Complexity: O(N * Target)
+# Space Complexity: O(Target)
+def optimal_solution(nums: list[int], target: int) -> int:
+    total = sum(nums)
+    if (total + target) % 2 != 0 or total < abs(target):
+        return 0
+    t = (total + target) // 2
+    
+    dp = [0] * (t + 1)
+    dp[0] = 1
+    for num in nums:
+        for val in range(t, num - 1, -1):
+            dp[val] += dp[val - num]
+    return dp[t]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Target sum...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 1, 1, 1, 1], 3) == 5
     print("Done.")

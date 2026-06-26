@@ -1,44 +1,31 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/minimal-cost/1
 Problem Name: Frog Jump with K Distance
-Description: Problem description goes here.
+Description: Frog can jump at most K steps. Find minimal energy loss.
 
 Folder: Dynamic_Programming
-File: 407_Frog_Jump_with_K_Distance.md
+File: 407_Frog_Jump_with_K_Distance.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * K)
+# Space Complexity: O(N)
+def optimal_solution(heights: list[int], k: int) -> int:
+    n = len(heights)
+    dp = [0] * n
+    for i in range(1, n):
+        min_steps = float('inf')
+        for j in range(1, min(i, k) + 1):
+            min_steps = min(min_steps, dp[i - j] + abs(heights[i] - heights[i - j]))
+        dp[i] = min_steps
+    return dp[-1]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Frog Jump with K Distance...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([10, 30, 40, 50, 20], 3) == 30
     print("Done.")

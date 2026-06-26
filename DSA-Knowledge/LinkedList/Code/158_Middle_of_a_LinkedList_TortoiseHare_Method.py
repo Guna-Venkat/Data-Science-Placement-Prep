@@ -1,44 +1,37 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Middle of a LinkedList TortoiseHare Method
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/middle-of-the-linked-list/
+Problem Name: Middle of the Linked List
+Description: Find the middle node of a singly linked list. Return the second middle if even.
 
 Folder: LinkedList
-File: 158_Middle_of_a_LinkedList_TortoiseHare_Method.md
+File: 158_Middle_of_a_LinkedList_TortoiseHare_Method.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Tortoise moves 1 step; Hare moves 2 steps.
+# When Hare reaches end, Tortoise will be at the middle.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> ListNode:
+    slow = head
+    fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Middle of a LinkedList TortoiseHare Method...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+    assert optimal_solution(head).val == 3
     print("Done.")

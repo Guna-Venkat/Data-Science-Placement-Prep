@@ -1,44 +1,44 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/combination-sum-iii/
 Problem Name: Combination Sum III
-Description: Problem description goes here.
+Description: Find all combinations of k numbers that sum to n using numbers 1 to 9.
 
 Folder: Recursion
-File: 195_Combination_Sum_III.md
+File: 195_Combination_Sum_III.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(9! / (k! * (9-k)!)) combinations
+# Space Complexity: O(k) stack depth
+def optimal_solution(k: int, n: int) -> list[list[int]]:
+    result = []
+    
+    def backtrack(num, target, path):
+        if len(path) == k:
+            if target == 0:
+                result.append(list(path))
+            return
+        if num > 9 or target < 0:
+            return
+            
+        # pick
+        path.append(num)
+        backtrack(num + 1, target - num, path)
+        path.pop()
+        
+        # don't pick
+        backtrack(num + 1, target, path)
+
+    backtrack(1, n, [])
+    return result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Combination Sum III...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    res = optimal_solution(3, 7)
+    assert res == [[1, 2, 4]]
     print("Done.")

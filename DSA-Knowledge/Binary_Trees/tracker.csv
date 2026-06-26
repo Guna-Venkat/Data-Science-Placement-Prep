@@ -1,39 +1,39 @@
 ID,Problem,Difficulty,Pattern,Status,Time_Complexity,Space_Complexity
-297,297_Introduction_to_Trees,,,,,
-298,298_Binary_Tree_Representation_in_Java,,,,,
-299,299_Pre_Post_Inorder_in_one_traversal,,,,,
-300,300_Preorder_Traversal,,,,,
-301,301_Inorder_Traversal_of_Binary_Tree,,,,,
-302,302_Postorder_Traversal,,,,,
-303,303_Level_Order_Traversal,,,,,
-304,304_Iterative_Preorder_Traversal_of_Binary_Tree,,,,,
-305,305_Iterative_Inorder_Traversal_of_Binary_Tree,,,,,
-306,306_Post_order_Traversal_of_Binary_Tree_using_2_stack,,,,,
-307,307_Post_order_Traversal_of_Binary_Tree_using_1_stack,,,,,
-308,308_Preorder_Inorder_and_Postorder_Traversal_in_one_Traversal,,,,,
-309,309_Maximum_Depth_in_BT,,,,,
-310,310_Check_for_balanced_binary_tree,,,,,
-311,311_Diameter_of_Binary_Tree,,,,,
-312,312_Maximum_path_sum,,,,,
-313,313_Check_if_two_trees_are_identical_or_not,,,,,
-314,314_Zig_Zag_or_Spiral_Traversal,,,,,
-315,315_Boundary_Traversal,,,,,
-316,316_Vertical_Order_Traversal,,,,,
-317,317_Top_View_of_BT,,,,,
-318,318_Bottom_view_of_BT,,,,,
-319,319_RightLeft_View_of_Binary_Tree,,,,,
-320,320_Symmetric_Binary_Tree,,,,,
-321,321_Print_root_to_leaf_path_in_BT,,,,,
-322,322_LCA_in_BT,,,,,
-323,323_Maximum_Width_of_BT,,,,,
-324,324_Children_Sum_Property_in_Binary_Tree,,,,,
-325,325_Print_all_nodes_at_a_distance_of_K_in_BT,,,,,
-326,326_Minimum_time_taken_to_burn_the_BT_from_a_given_Node,,,,,
-327,327_Count_total_nodes_in_a_complete_BT,,,,,
-328,328_Requirements_needed_to_construct_a_unique_BT,,,,,
-329,329_Construct_a_BT_from_Preorder_and_Inorder,,,,,
-330,330_Construct_the_Binary_Tree_from_Postorder_and_Inorder_Traversal,,,,,
-331,331_Serialize_and_De_serialize_BT,,,,,
-332,332_Morris_Preorder_Traversal_of_a_Binary_Tree,,,,,
-333,333_Morris_Inorder_Traversal_of_a_Binary_Tree,,,,,
-334,334_Flatten_Binary_Tree_to_Linked_List,,,,,
+297,297_Introduction_to_Trees,Easy,Properties,Completed,O(1),O(1)
+298,298_Binary_Tree_Representation_in_Java,Easy,Representation,Completed,O(N),O(N)
+299,299_Pre_Post_Inorder_in_one_traversal,Easy,Traversal,Completed,O(N),O(H)
+300,300_Preorder_Traversal,Easy,Traversal,Completed,O(N),O(H)
+301,301_Inorder_Traversal_of_Binary_Tree,Easy,Traversal,Completed,O(N),O(H)
+302,302_Postorder_Traversal,Easy,Traversal,Completed,O(N),O(H)
+303,303_Level_Order_Traversal,Easy,Traversal / BFS,Completed,O(N),O(N)
+304,304_Iterative_Preorder_Traversal_of_Binary_Tree,Easy,Iterative Traversal / Stack,Completed,O(N),O(H)
+305,305_Iterative_Inorder_Traversal_of_Binary_Tree,Easy,Iterative Traversal / Stack,Completed,O(N),O(H)
+306,306_Post_order_Traversal_of_Binary_Tree_using_2_stack,Easy,Iterative Traversal / Stack,Completed,O(N),O(N)
+307,307_Post_order_Traversal_of_Binary_Tree_using_1_stack,Medium,Iterative Traversal / Stack,Completed,O(N),O(H)
+308,308_Preorder_Inorder_and_Postorder_Traversal_in_one_Traversal,Medium,Iterative Traversal / Stack,Completed,O(N),O(H)
+309,309_Maximum_Depth_in_BT,Easy,Depth / DFS,Completed,O(N),O(H)
+310,310_Check_for_balanced_binary_tree,Easy,Depth / Balanced check,Completed,O(N),O(H)
+311,311_Diameter_of_Binary_Tree,Easy,DFS / Height-balanced,Completed,O(N),O(H)
+312,312_Maximum_path_sum,Hard,DFS / Height-balanced,Completed,O(N),O(H)
+313,313_Check_if_two_trees_are_identical_or_not,Easy,Recursion / Same Tree,Completed,O(N),O(H)
+314,314_Zig_Zag_or_Spiral_Traversal,Medium,Level-order / Deque,Completed,O(N),O(N)
+315,315_Boundary_Traversal,Medium,Boundary Traversal,Completed,O(N),O(H)
+316,316_Vertical_Order_Traversal,Hard,Coordinate sorting / BFS,Completed,O(N log N),O(N)
+317,317_Top_View_of_BT,Medium,Coordinate map / BFS,Completed,O(N),O(N)
+318,318_Bottom_view_of_BT,Medium,Coordinate map / BFS,Completed,O(N),O(N)
+319,319_RightLeft_View_of_Binary_Tree,Medium,Depth-controlled DFS,Completed,O(N),O(H)
+320,320_Symmetric_Binary_Tree,Easy,Mirror check / DFS,Completed,O(N),O(H)
+321,321_Print_root_to_leaf_path_in_BT,Easy,DFS paths,Completed,O(N),O(H)
+322,322_LCA_in_BT,Medium,Recursion / LCA,Completed,O(N),O(H)
+323,323_Maximum_Width_of_BT,Medium,Node index / BFS,Completed,O(N),O(N)
+324,324_Children_Sum_Property_in_Binary_Tree,Medium,Pre-post traversal,Completed,O(N),O(H)
+325,325_Print_all_nodes_at_a_distance_of_K_in_BT,Medium,BFS / parents map,Completed,O(N),O(N)
+326,326_Minimum_time_taken_to_burn_the_BT_from_a_given_Node,Medium,BFS / parents map,Completed,O(N),O(N)
+327,327_Count_total_nodes_in_a_complete_BT,Medium,Height calculation / Math,Completed,O((log N)^2),O(log N)
+328,328_Requirements_needed_to_construct_a_unique_BT,Easy,Properties,Completed,O(1),O(1)
+329,329_Construct_a_BT_from_Preorder_and_Inorder,Medium,Hash map / Recursion,Completed,O(N),O(N)
+330,330_Construct_the_Binary_Tree_from_Postorder_and_Inorder_Traversal,Medium,Hash map / Recursion,Completed,O(N),O(N)
+331,331_Serialize_and_De_serialize_BT,Hard,Preorder serialization,Completed,O(N),O(N)
+332,332_Morris_Preorder_Traversal_of_a_Binary_Tree,Medium,Threaded binary tree,Completed,O(N),O(1)
+333,333_Morris_Inorder_Traversal_of_a_Binary_Tree,Medium,Threaded binary tree,Completed,O(N),O(1)
+334,334_Flatten_Binary_Tree_to_Linked_List,Medium,Reverse postorder DFS,Completed,O(N),O(H)

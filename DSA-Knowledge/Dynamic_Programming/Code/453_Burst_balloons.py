@@ -1,44 +1,37 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Burst balloons
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/burst-balloons/
+Problem Name: Burst Balloons
+Description: Burst balloons to maximize coins collected.
 
 Folder: Dynamic_Programming
-File: 453_Burst_balloons.md
+File: 453_Burst_balloons.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: MCM layout. Define subproblem as last balloon to burst in range (i, j).
+# Time Complexity: O(N^3)
+# Space Complexity: O(N^2)
+def optimal_solution(nums: list[int]) -> int:
+    arr = [1] + nums + [1]
+    n = len(arr)
+    dp = [[0] * n for _ in range(n)]
+    
+    for l in range(1, n - 1):
+        for i in range(1, n - l):
+            j = i + l - 1
+            for k in range(i, j + 1):
+                coins = arr[i - 1] * arr[k] * arr[j + 1]
+                coins += dp[i][k - 1] + dp[k + 1][j]
+                dp[i][j] = max(dp[i][j], coins)
+                
+    return dp[1][n - 2]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Burst balloons...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([3, 1, 5, 8]) == 167
     print("Done.")

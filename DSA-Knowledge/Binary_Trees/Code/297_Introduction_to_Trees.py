@@ -1,44 +1,28 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/introduction-to-trees/1
 Problem Name: Introduction to Trees
-Description: Problem description goes here.
+Description: Given level i of a binary tree, find the maximum number of nodes possible at that level.
 
 Folder: Binary_Trees
-File: 297_Introduction_to_Trees.md
+File: 297_Introduction_to_Trees.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Number of nodes at level i is 2^(i-1) if level is 1-indexed.
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+def optimal_solution(i: int) -> int:
+    if i <= 0:
+        return 0
+    return 2 ** (i - 1)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Introduction to Trees...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(5) == 16
+    assert optimal_solution(1) == 1
     print("Done.")

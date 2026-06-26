@@ -1,44 +1,38 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Subsets I
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/subset-sums2234/1
+Problem Name: Subset Sums (Subsets I)
+Description: Generate sum of all possible subsets.
 
 Folder: Recursion
-File: 193_Subsets_I.md
+File: 193_Subsets_I.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(2^N)
+# Space Complexity: O(N) recursion stack
+def optimal_solution(arr: list[int]) -> list[int]:
+    result = []
+    
+    def backtrack(idx, curr_sum):
+        if idx == len(arr):
+            result.append(curr_sum)
+            return
+            
+        # pick
+        backtrack(idx + 1, curr_sum + arr[idx])
+        # don't pick
+        backtrack(idx + 1, curr_sum)
+
+    backtrack(0, 0)
+    result.sort()
+    return result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Subsets I...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([2, 3]) == [0, 2, 3, 5]
     print("Done.")

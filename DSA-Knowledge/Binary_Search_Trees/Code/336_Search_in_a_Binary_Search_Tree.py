@@ -1,44 +1,50 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/search-in-a-binary-search-tree/
 Problem Name: Search in a Binary Search Tree
-Description: Problem description goes here.
+Description: Find the node in the BST that the node's value equals val and return that subtree.
 
 Folder: Binary_Search_Trees
-File: 336_Search_in_a_Binary_Search_Tree.md
+File: 336_Search_in_a_Binary_Search_Tree.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: If val < root.val, search left; if val > root.val, search right.
+# Time Complexity: O(H) where H is height of the tree.
+# Space Complexity: O(1) iterative
+def optimal_solution(root: TreeNode, val: int) -> TreeNode:
+    curr = root
+    while curr is not None and curr.val != val:
+        if val < curr.val:
+            curr = curr.left
+        else:
+            curr = curr.right
+    return curr
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Search in a Binary Search Tree...")
+    print("Running tests...")
+    # Tree:
+    #      4
+    #     /     #    2   7
+    #   /     #  1   3
+    root = TreeNode(4)
+    root.left = TreeNode(2, TreeNode(1), TreeNode(3))
+    root.right = TreeNode(7)
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
+    res = optimal_solution(root, 2)
+    assert res is not None and res.val == 2
+    assert res.left.val == 1
     
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    res_none = optimal_solution(root, 5)
+    assert res_none is None
     print("Done.")

@@ -1,44 +1,54 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.codingninjas.com/studio/problems/childrensumproperty_790775
 Problem Name: Children Sum Property in Binary Tree
-Description: Problem description goes here.
+Description: Convert a binary tree such that each node's value equals sum of children's values. Incrementing only.
 
 Folder: Binary_Trees
-File: 324_Children_Sum_Property_in_Binary_Tree.md
+File: 324_Children_Sum_Property_in_Binary_Tree.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(H) recursion stack
+def optimal_solution(root: TreeNode):
+    if not root or (not root.left and not root.right):
+        return
+        
+    child_sum = 0
+    if root.left: child_sum += root.left.val
+    if root.right: child_sum += root.right.val
+    
+    if child_sum >= root.val:
+        root.val = child_sum
+    else:
+        # propagate parent's value down to prevent node deficit
+        if root.left: root.left.val = root.val
+        if root.right: root.right.val = root.val
+        
+    optimal_solution(root.left)
+    optimal_solution(root.right)
+    
+    total = 0
+    if root.left: total += root.left.val
+    if root.right: total += root.right.val
+    if root.left or root.right:
+        root.val = total
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Children Sum Property in Binary Tree...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(2, TreeNode(35, TreeNode(2), TreeNode(3)), TreeNode(10, TreeNode(5), TreeNode(2)))
+    optimal_solution(root)
+    # verify root val equals children sum
+    assert root.val == root.left.val + root.right.val
     print("Done.")

@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Longest palindromic subsequence
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/longest-palindromic-subsequence/
+Problem Name: Longest Palindromic Subsequence
+Description: Find length of longest palindromic subsequence of string.
 
 Folder: Dynamic_Programming
-File: 430_Longest_palindromic_subsequence.md
+File: 430_Longest_palindromic_subsequence.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: LCS of string s and its reverse s[::-1].
+# Time Complexity: O(N^2)
+# Space Complexity: O(N)
+def optimal_solution(s: str) -> int:
+    s_rev = s[::-1]
+    n = len(s)
+    dp = [0] * (n + 1)
+    for char in s:
+        next_dp = [0] * (n + 1)
+        for j in range(1, n + 1):
+            if char == s_rev[j - 1]:
+                next_dp[j] = 1 + dp[j - 1]
+            else:
+                next_dp[j] = max(dp[j], next_dp[j - 1])
+        dp = next_dp
+    return dp[n]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Longest palindromic subsequence...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("bbbab") == 4
     print("Done.")

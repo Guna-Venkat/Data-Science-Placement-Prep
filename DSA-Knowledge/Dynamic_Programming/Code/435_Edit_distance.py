@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/edit-distance/
-Problem Name: Edit distance
-Description: Minimum operations to convert word1 to word2.
+LeetCode Link: https://leetcode.com/problems/edit-distance/
+Problem Name: Edit Distance
+Description: Find minimum operations (insert, delete, replace) to convert word1 to word2.
 
 Folder: Dynamic_Programming
-File: 435_Edit_distance.md
+File: 435_Edit_distance.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * M)
+# Space Complexity: O(M)
+def optimal_solution(word1: str, word2: str) -> int:
+    m = len(word2)
+    dp = list(range(m + 1))
+    
+    for char in word1:
+        next_dp = [0] * (m + 1)
+        next_dp[0] = dp[0] + 1
+        for j in range(1, m + 1):
+            if char == word2[j - 1]:
+                next_dp[j] = dp[j - 1]
+            else:
+                next_dp[j] = 1 + min(dp[j], next_dp[j - 1], dp[j - 1])
+        dp = next_dp
+    return dp[m]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Edit distance...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("horse", "ros") == 3
     print("Done.")

@@ -1,44 +1,39 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/delete-node-in-doubly-linked-list/1
 Problem Name: Delete head of Doubly Linked List
-Description: Problem description goes here.
+Description: Delete the head node of a doubly linked list.
 
 Folder: LinkedList
-File: 156_Delete_head_of_Doubly_Linked_List.md
+File: 156_Delete_head_of_Doubly_Linked_List.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class DLLNode:
+    def __init__(self, val=0, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+def optimal_solution(head: DLLNode) -> DLLNode:
+    if not head or not head.next:
+        return None
+    new_head = head.next
+    new_head.prev = None
+    return new_head
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Delete head of Doubly Linked List...")
+    print("Running tests...")
+    head = DLLNode(1)
+    head.next = DLLNode(2, prev=head)
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    new_head = optimal_solution(head)
+    assert new_head.val == 2
+    assert new_head.prev is None
     print("Done.")

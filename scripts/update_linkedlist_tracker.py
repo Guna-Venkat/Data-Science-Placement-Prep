@@ -1,0 +1,47 @@
+import csv
+import os
+
+TRACKER_DATA = [
+    ["149", "149_Introduction_to_Singly_LinkedList", "Easy", "Singly LL Creation", "Completed", "O(N)", "O(1)"],
+    ["150", "150_Insertion_at_the_head_of_Linked_List", "Easy", "Insertion", "Completed", "O(1)", "O(1)"],
+    ["151", "151_Deletion_of_the_head_of_LL", "Easy", "Deletion", "Completed", "O(1)", "O(1)"],
+    ["152", "152_Find_the_length_of_the_Linked_List", "Easy", "Traversal", "Completed", "O(N)", "O(1)"],
+    ["153", "153_Search_in_Linked_List", "Easy", "Search", "Completed", "O(N)", "O(1)"],
+    ["154", "154_Introduction_to_Doubly_LL", "Easy", "DLL Creation", "Completed", "O(N)", "O(1)"],
+    ["155", "155_Insert_node_before_head_in_Doubly_Linked_List", "Easy", "Insertion", "Completed", "O(1)", "O(1)"],
+    ["156", "156_Delete_head_of_Doubly_Linked_List", "Easy", "Deletion", "Completed", "O(1)", "O(1)"],
+    ["157", "157_Reverse_a_Doubly_Linked_List", "Easy", "DLL Traversal", "Completed", "O(N)", "O(1)"],
+    ["158", "158_Middle_of_a_LinkedList_TortoiseHare_Method", "Easy", "Tortoise-Hare", "Completed", "O(N)", "O(1)"],
+    ["159", "159_Reverse_a_LinkedList_Iterative", "Easy", "Reversal", "Completed", "O(N)", "O(1)"],
+    ["160", "160_Reverse_a_LL_Recursive", "Easy", "Reversal / Recursion", "Completed", "O(N)", "O(N)"],
+    ["161", "161_Detect_a_loop_in_LL", "Easy", "Tortoise-Hare", "Completed", "O(N)", "O(1)"],
+    ["162", "162_Find_the_starting_point_in_LL", "Medium", "Cycle Detection / Math", "Completed", "O(N)", "O(1)"],
+    ["163", "163_Length_of_loop_in_LL", "Easy", "Cycle Detection / Math", "Completed", "O(N)", "O(1)"],
+    ["164", "164_Check_if_LL_is_palindrome_or_not", "Easy", "Reversal / Middle", "Completed", "O(N)", "O(1)"],
+    ["165", "165_Segregate_odd_and_even_nodes_in_Linked_List", "Medium", "Pointer Re-linking", "Completed", "O(N)", "O(1)"],
+    ["166", "166_Remove_Nth_node_from_the_back_of_the_LL", "Medium", "Fast-Slow / Dummy", "Completed", "O(N)", "O(1)"],
+    ["167", "167_Delete_the_middle_node_in_LL", "Medium", "Fast-Slow / Dummy", "Completed", "O(N)", "O(1)"],
+    ["168", "168_Sort_LL", "Medium", "Merge Sort", "Completed", "O(N log N)", "O(log N)"],
+    ["169", "169_Sort_a_Linked_List_of_0s_1s_and_2s", "Easy", "Counting / Linking", "Completed", "O(N)", "O(1)"],
+    ["170", "170_Find_the_intersection_point_of_Y_LL", "Easy", "Length Difference / Two Pointers", "Completed", "O(N+M)", "O(1)"],
+    ["171", "171_Add_one_to_a_number_represented_by_LL", "Easy", "Recursion / Math", "Completed", "O(N)", "O(N)"],
+    ["172", "172_Add_two_numbers_in_Linked_List", "Medium", "Addition", "Completed", "O(max(N,M))", "O(max(N,M))"],
+    ["173", "173_Delete_all_occurrences_of_a_key_in_DLL", "Easy", "DLL Traversal", "Completed", "O(N)", "O(1)"],
+    ["174", "174_Find_Pairs_with_Given_Sum_in_Doubly_Linked_List", "Easy", "Two Pointers", "Completed", "O(N)", "O(1)"],
+    ["175", "175_Remove_duplicates_from_sorted_DLL", "Easy", "DLL Traversal", "Completed", "O(N)", "O(1)"],
+    ["176", "176_Reverse_LL_in_group_of_given_size_K", "Hard", "Reversal / Recursion", "Completed", "O(N)", "O(N/K)"],
+    ["177", "177_Rotate_a_LL", "Medium", "Circular list", "Completed", "O(N)", "O(1)"],
+    ["178", "178_Flattening_of_LL", "Medium", "Merge / Recursion", "Completed", "O(N*M)", "O(N)"],
+    ["179", "179_Clone_a_LL_with_random_and_next_pointer", "Hard", "Interweaving nodes", "Completed", "O(N)", "O(1)"]
+]
+
+def main():
+    filepath = os.path.join(".", "DSA-Knowledge", "LinkedList", "tracker.csv")
+    with open(filepath, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["ID", "Problem", "Difficulty", "Pattern", "Status", "Time_Complexity", "Space_Complexity"])
+        writer.writerows(TRACKER_DATA)
+    print(f"Updated {filepath} successfully with comprehensive LinkedList data!")
+
+if __name__ == "__main__":
+    main()

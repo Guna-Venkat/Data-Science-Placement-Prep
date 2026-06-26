@@ -1,44 +1,34 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.codingninjas.com/studio/problems/frog-jump_3621012
 Problem Name: Frog Jump
-Description: Problem description goes here.
+Description: Find minimum energy lost by a frog jumping 1 or 2 steps.
 
 Folder: Dynamic_Programming
-File: 406_Frog_Jump.md
+File: 406_Frog_Jump.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(heights: list[int]) -> int:
+    n = len(heights)
+    if n <= 1:
+        return 0
+    prev2, prev = 0, abs(heights[1] - heights[0])
+    for i in range(2, n):
+        jump1 = prev + abs(heights[i] - heights[i-1])
+        jump2 = prev2 + abs(heights[i] - heights[i-2])
+        curr = min(jump1, jump2)
+        prev2 = prev
+        prev = curr
+    return prev
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Frog Jump...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([10, 20, 30, 10]) == 20
     print("Done.")

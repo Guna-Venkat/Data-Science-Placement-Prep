@@ -1,44 +1,53 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Length of loop in LL
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/find-length-of-loop/1
+Problem Name: Find Length of Loop in Linked List
+Description: Find the number of nodes inside the loop of a linked list.
 
 Folder: LinkedList
-File: 163_Length_of_loop_in_LL.md
+File: 163_Length_of_loop_in_LL.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Once slow meets fast, hold fast in place and move slow count steps until it meets fast again.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> int:
+    slow = head
+    fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            # Count length of loop
+            count = 1
+            slow = slow.next
+            while slow != fast:
+                count += 1
+                slow = slow.next
+            return count
+    return 0
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Length of loop in LL...")
+    print("Running tests...")
+    head = ListNode(1)
+    node2 = ListNode(2)
+    node3 = ListNode(3)
+    node4 = ListNode(4)
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
+    head.next = node2
+    node2.next = node3
+    node3.next = node4
+    node4.next = node2 # Loop length is 3 (2 -> 3 -> 4 -> 2)
     
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    assert optimal_solution(head) == 3
     print("Done.")

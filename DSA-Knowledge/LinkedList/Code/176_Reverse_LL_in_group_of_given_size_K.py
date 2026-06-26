@@ -1,44 +1,51 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Reverse LL in group of given size K
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/reverse-nodes-in-k-group/
+Problem Name: Reverse Nodes in k-Group
+Description: Reverse nodes of a linked list k at a time.
 
 Folder: LinkedList
-File: 176_Reverse_LL_in_group_of_given_size_K.md
+File: 176_Reverse_LL_in_group_of_given_size_K.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Verify k nodes exist before reversing. Reverse them recursively or iteratively.
+# Time Complexity: O(N)
+# Space Complexity: O(N/K) recursion stack
+def optimal_solution(head: ListNode, k: int) -> ListNode:
+    # Check if there are k nodes left
+    curr = head
+    for _ in range(k):
+        if not curr:
+            return head
+        curr = curr.next
+        
+    # Reverse k nodes
+    prev = None
+    curr = head
+    for _ in range(k):
+        temp = curr.next
+        curr.next = prev
+        prev = curr
+        curr = temp
+        
+    head.next = optimal_solution(curr, k)
+    return prev
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Reverse LL in group of given size K...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+    res = optimal_solution(head, 2) # (2->1->4->3->5)
+    assert res.val == 2
+    assert res.next.val == 1
+    assert res.next.next.val == 4
     print("Done.")

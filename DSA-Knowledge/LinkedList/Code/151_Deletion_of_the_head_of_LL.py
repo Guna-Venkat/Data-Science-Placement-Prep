@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/delete-a-node-in-single-linked-list/1
 Problem Name: Deletion of the head of LL
-Description: Problem description goes here.
+Description: Delete the head node of a singly linked list.
 
 Folder: LinkedList
-File: 151_Deletion_of_the_head_of_LL.md
+File: 151_Deletion_of_the_head_of_LL.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> ListNode:
+    if not head:
+        return None
+    return head.next
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Deletion of the head of LL...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3)))
+    new_head = optimal_solution(head)
+    assert new_head.val == 2
     print("Done.")

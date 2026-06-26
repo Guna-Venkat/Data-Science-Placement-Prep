@@ -1,44 +1,46 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Palindrome partitioning II
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/palindrome-partitioning-ii/
+Problem Name: Palindrome Partitioning II
+Description: Find minimal cuts needed for palindrome partitioning of a string.
 
 Folder: Dynamic_Programming
-File: 455_Palindrome_partitioning_II.md
+File: 455_Palindrome_partitioning_II.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N^2)
+# Space Complexity: O(N^2)
+def optimal_solution(s: str) -> int:
+    n = len(s)
+    is_pal = [[False] * n for _ in range(n)]
+    for i in range(n):
+        is_pal[i][i] = True
+    for length in range(2, n + 1):
+        for i in range(n - length + 1):
+            j = i + length - 1
+            if length == 2:
+                is_pal[i][j] = (s[i] == s[j])
+            else:
+                is_pal[i][j] = (s[i] == s[j] and is_pal[i+1][j-1])
+                
+    cuts = [0] * n
+    for i in range(n):
+        if is_pal[0][i]:
+            cuts[i] = 0
+        else:
+            min_cut = float('inf')
+            for j in range(i):
+                if is_pal[j + 1][i]:
+                    min_cut = min(min_cut, cuts[j] + 1)
+            cuts[i] = min_cut
+    return cuts[-1]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Palindrome partitioning II...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("aab") == 1
     print("Done.")

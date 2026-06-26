@@ -1,44 +1,35 @@
 """
-LeetCode Problem: https://leetcode.com/problems/longest-common-subsequence/
-Problem Name: Longest common subsequence
-Description: DP for LCS of two strings.
+LeetCode Link: https://leetcode.com/problems/longest-common-subsequence/
+Problem Name: Longest Common Subsequence
+Description: Length of longest common subsequence of two strings.
 
 Folder: Dynamic_Programming
-File: 427_Longest_common_subsequence.md
+File: 427_Longest_common_subsequence.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * M)
+# Space Complexity: O(M) space optimized
+def optimal_solution(text1: str, text2: str) -> int:
+    m = len(text2)
+    dp = [0] * (m + 1)
+    
+    for c1 in text1:
+        next_dp = [0] * (m + 1)
+        for j in range(1, m + 1):
+            if c1 == text2[j - 1]:
+                next_dp[j] = 1 + dp[j - 1]
+            else:
+                next_dp[j] = max(dp[j], next_dp[j - 1])
+        dp = next_dp
+    return dp[m]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Longest common subsequence...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("abcde", "ace") == 3
     print("Done.")

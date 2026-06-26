@@ -1,44 +1,30 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/introduction-to-graph/1
 Problem Name: Introduction to Graph
-Description: Problem description goes here.
+Description: Find the number of possible undirected graphs with V vertices.
 
 Folder: Graphs
-File: 351_Introduction_to_Graph.md
+File: 351_Introduction_to_Graph.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Max number of edges in undirected graph is V * (V - 1) / 2.
+# For each edge, we have 2 choices: present or absent.
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+def optimal_solution(v: int) -> int:
+    if v <= 1:
+        return 1
+    edges = (v * (v - 1)) // 2
+    return 2 ** edges
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Introduction to Graph...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(3) == 8
+    assert optimal_solution(4) == 64
     print("Done.")

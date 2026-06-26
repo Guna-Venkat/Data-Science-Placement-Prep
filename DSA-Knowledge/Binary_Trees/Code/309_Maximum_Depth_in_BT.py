@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Maximum Depth in BT
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/maximum-depth-of-binary-tree/
+Problem Name: Maximum Depth of Binary Tree
+Description: Find the maximum depth of a binary tree.
 
 Folder: Binary_Trees
-File: 309_Maximum_Depth_in_BT.md
+File: 309_Maximum_Depth_in_BT.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(H)
+def optimal_solution(root: TreeNode) -> int:
+    if not root:
+        return 0
+    return 1 + max(optimal_solution(root.left), optimal_solution(root.right))
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Maximum Depth in BT...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
+    assert optimal_solution(root) == 3
     print("Done.")

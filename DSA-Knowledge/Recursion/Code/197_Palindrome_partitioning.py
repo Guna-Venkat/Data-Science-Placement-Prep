@@ -1,44 +1,44 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Palindrome partitioning
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/palindrome-partitioning/
+Problem Name: Palindrome Partitioning
+Description: Partition a string such that every substring of the partition is a palindrome.
 
 Folder: Recursion
-File: 197_Palindrome_partitioning.md
+File: 197_Palindrome_partitioning.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Try cutting string at indices. If prefix is palindrome, recursively partition remaining.
+# Time Complexity: O(2^N * N)
+# Space Complexity: O(N)
+def optimal_solution(s: str) -> list[list[str]]:
+    result = []
+    
+    def is_palindrome(val):
+        return val == val[::-1]
+
+    def backtrack(idx, path):
+        if idx == len(s):
+            result.append(list(path))
+            return
+            
+        for i in range(idx, len(s)):
+            part = s[idx:i+1]
+            if is_palindrome(part):
+                path.append(part)
+                backtrack(i + 1, path)
+                path.pop()
+
+    backtrack(0, [])
+    return result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Palindrome partitioning...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    res = optimal_solution("aab")
+    assert sorted(res) == sorted([["a", "a", "b"], ["aa", "b"]])
     print("Done.")

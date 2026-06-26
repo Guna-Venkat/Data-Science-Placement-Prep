@@ -1,44 +1,39 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Djisktras Algorithm
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1
+Problem Name: Dijkstra's Algorithm
+Description: Shortest path from source node using Min Heap.
 
 Folder: Graphs
-File: 380_Djisktras_Algorithm.md
+File: 380_Djisktras_Algorithm.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+import heapq
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(E log V)
+# Space Complexity: O(V)
+def optimal_solution(v: int, adj: list[list[tuple[int, int]]], src: int) -> list[int]:
+    dist = [float('inf')] * v
+    dist[src] = 0
+    pq = [(0, src)] # (distance, node)
+    
+    while pq:
+        d, node = heapq.heappop(pq)
+        if d > dist[node]:
+            continue
+        for neighbor, weight in adj[node]:
+            if dist[neighbor] > d + weight:
+                dist[neighbor] = d + weight
+                heapq.heappush(pq, (dist[neighbor], neighbor))
+    return dist
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Djisktras Algorithm...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    adj = [[(1, 4), (2, 1)], [(0, 4), (2, 2)], [(0, 1), (1, 2)]]
+    assert optimal_solution(3, adj, 0) == [0, 3, 1]
     print("Done.")

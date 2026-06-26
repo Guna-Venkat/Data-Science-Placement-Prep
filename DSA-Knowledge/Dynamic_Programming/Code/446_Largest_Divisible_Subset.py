@@ -1,44 +1,49 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/largest-divisible-subset/
 Problem Name: Largest Divisible Subset
-Description: Problem description goes here.
+Description: Find largest subset where every pair satisfies s[i] % s[j] == 0 or vice versa.
 
 Folder: Dynamic_Programming
-File: 446_Largest_Divisible_Subset.md
+File: 446_Largest_Divisible_Subset.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Sort nums first. Standard LIS format where condition is nums[i] % nums[j] == 0.
+# Time Complexity: O(N^2)
+# Space Complexity: O(N)
+def optimal_solution(nums: list[int]) -> list[int]:
+    if not nums:
+        return []
+    nums.sort()
+    n = len(nums)
+    dp = [1] * n
+    parent = list(range(n))
+    max_len = 1
+    last_idx = 0
+    
+    for i in range(n):
+        for j in range(i):
+            if nums[i] % nums[j] == 0 and dp[j] + 1 > dp[i]:
+                dp[i] = dp[j] + 1
+                parent[i] = j
+        if dp[i] > max_len:
+            max_len = dp[i]
+            last_idx = i
+            
+    res = []
+    curr = last_idx
+    while parent[curr] != curr:
+        res.append(nums[curr])
+        curr = parent[curr]
+    res.append(nums[curr])
+    return res[::-1]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Largest Divisible Subset...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 2, 3]) == [1, 2] or optimal_solution([1, 2, 3]) == [1, 3]
     print("Done.")

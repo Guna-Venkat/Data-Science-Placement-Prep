@@ -1,44 +1,38 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Powx n
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/powx-n/
+Problem Name: Pow(x, n)
+Description: Compute x raised to the power n.
 
 Folder: Recursion
-File: 181_Powx_n.md
+File: 181_Powx_n.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Binary Exponentiation. Compute x^(n/2) and multiply.
+# Time Complexity: O(log n)
+# Space Complexity: O(log n) recursion stack
+def optimal_solution(x: float, n: int) -> float:
+    def helper(base, exp):
+        if exp == 0:
+            return 1.0
+        half = helper(base, exp // 2)
+        if exp % 2 == 0:
+            return half * half
+        else:
+            return half * half * base
+
+    if n < 0:
+        return 1.0 / helper(x, -n)
+    return helper(x, n)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Powx n...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert abs(optimal_solution(2.0, 10) - 1024.0) < 1e-9
+    assert abs(optimal_solution(2.1, 3) - 9.261) < 1e-9
+    assert abs(optimal_solution(2.0, -2) - 0.25) < 1e-9
     print("Done.")

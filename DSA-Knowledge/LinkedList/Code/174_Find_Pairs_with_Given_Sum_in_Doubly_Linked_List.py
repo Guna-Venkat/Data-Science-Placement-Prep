@@ -1,44 +1,57 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Find Pairs with Given Sum in Doubly Linked List
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/find-pairs-with-given-sum-in-doubly-linked-list/1
+Problem Name: Find pairs with given sum in sorted DLL
+Description: Find all pairs in a sorted doubly linked list whose sum is equal to target.
 
 Folder: LinkedList
-File: 174_Find_Pairs_with_Given_Sum_in_Doubly_Linked_List.md
+File: 174_Find_Pairs_with_Given_Sum_in_Doubly_Linked_List.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class DLLNode:
+    def __init__(self, val=0, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Two pointer approach. One starting at head, other at tail.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: DLLNode, target: int) -> list[tuple[int, int]]:
+    if not head:
+        return []
+        
+    tail = head
+    while tail.next:
+        tail = tail.next
+        
+    pairs = []
+    l, r = head, tail
+    while l != r and r.next != l:
+        curr_sum = l.val + r.val
+        if curr_sum == target:
+            pairs.append((l.val, r.val))
+            l = l.next
+            r = r.prev
+        elif curr_sum < target:
+            l = l.next
+        else:
+            r = r.prev
+            
+    return pairs
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Find Pairs with Given Sum in Doubly Linked List...")
+    print("Running tests...")
+    head = DLLNode(1)
+    head.next = DLLNode(2, prev=head)
+    head.next.next = DLLNode(4, prev=head.next)
+    head.next.next.next = DLLNode(5, prev=head.next.next)
+    head.next.next.next.next = DLLNode(6, prev=head.next.next.next)
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    assert optimal_solution(head, 7) == [(1, 6), (2, 5)]
     print("Done.")

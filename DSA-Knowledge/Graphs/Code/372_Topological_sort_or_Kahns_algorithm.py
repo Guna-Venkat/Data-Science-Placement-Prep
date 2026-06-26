@@ -1,44 +1,41 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Topological sort or Kahns algorithm
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/topological-sort/1
+Problem Name: Topological Sort (Kahn's Algorithm BFS)
+Description: Topo sort using Kahn's algorithm (indegree).
 
 Folder: Graphs
-File: 372_Topological_sort_or_Kahns_algorithm.md
+File: 372_Topological_sort_or_Kahns_algorithm.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(V + E)
+# Space Complexity: O(V)
+def optimal_solution(v: int, adj: list[list[int]]) -> list[int]:
+    indegree = [0] * v
+    for i in range(v):
+        for neighbor in adj[i]:
+            indegree[neighbor] += 1
+            
+    queue = [i for i in range(v) if indegree[i] == 0]
+    topo = []
+    
+    while queue:
+        node = queue.pop(0)
+        topo.append(node)
+        for neighbor in adj[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                queue.append(neighbor)
+    return topo
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Topological sort or Kahns algorithm...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    adj = [[], [], [3], [1], [0, 1], [0, 2]]
+    res = optimal_solution(6, adj)
+    assert len(res) == 6
     print("Done.")

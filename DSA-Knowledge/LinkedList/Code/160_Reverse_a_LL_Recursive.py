@@ -1,44 +1,38 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Reverse a LL Recursive
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/reverse-linked-list/
+Problem Name: Reverse Linked List (Recursive)
+Description: Reverse a singly linked list in-place recursively.
 
 Folder: LinkedList
-File: 160_Reverse_a_LL_Recursive.md
+File: 160_Reverse_a_LL_Recursive.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(N) recursion stack
+def optimal_solution(head: ListNode) -> ListNode:
+    if not head or not head.next:
+        return head
+    
+    new_head = optimal_solution(head.next)
+    head.next.next = head
+    head.next = None
+    return new_head
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Reverse a LL Recursive...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3)))
+    rev = optimal_solution(head)
+    assert rev.val == 3
+    assert rev.next.val == 2
     print("Done.")

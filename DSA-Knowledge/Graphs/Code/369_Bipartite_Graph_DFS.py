@@ -1,44 +1,43 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Bipartite Graph DFS
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/is-graph-bipartite/
+Problem Name: Is Graph Bipartite? (DFS)
+Description: Determine if graph is bipartite (2-colorable).
 
 Folder: Graphs
-File: 369_Bipartite_Graph_DFS.md
+File: 369_Bipartite_Graph_DFS.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Bipartite graph is colorable using 2 colors such that adjacent vertices have different colors.
+# Time Complexity: O(V + E)
+# Space Complexity: O(V)
+def optimal_solution(graph: list[list[int]]) -> bool:
+    v = len(graph)
+    colors = {} # node -> color (0 or 1)
+    
+    def dfs(node, color):
+        colors[node] = color
+        for neighbor in graph[node]:
+            if neighbor not in colors:
+                if not dfs(neighbor, 1 - color):
+                    return False
+            elif colors[neighbor] == color:
+                return False
+        return True
+        
+    for i in range(v):
+        if i not in colors:
+            if not dfs(i, 0):
+                return False
+    return True
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Bipartite Graph DFS...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    graph = [[1,3],[0,2],[1,3],[0,2]]
+    assert optimal_solution(graph) == True
     print("Done.")

@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: DFS
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+Problem Name: DFS Traversal of Graph
+Description: Print Depth-First Search traversal of a graph.
 
 Folder: Graphs
-File: 356_DFS.md
+File: 356_DFS.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(V + E)
+# Space Complexity: O(V)
+def optimal_solution(v: int, adj: list[list[int]]) -> list[int]:
+    dfs_result = []
+    visited = [False] * v
+    
+    def dfs(node):
+        visited[node] = True
+        dfs_result.append(node)
+        for neighbor in adj[node]:
+            if not visited[neighbor]:
+                dfs(neighbor)
+                
+    dfs(0)
+    return dfs_result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for DFS...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    adj = [[1, 2], [0], [0]]
+    assert optimal_solution(3, adj) == [0, 1, 2]
     print("Done.")

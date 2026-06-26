@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Assign Cookies DP
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/assign-cookies/
+Problem Name: Assign Cookies (Greedy/DP)
+Description: Maximize content children given greed factor and cookie sizes.
 
 Folder: Dynamic_Programming
-File: 421_Assign_Cookies_DP.md
+File: 421_Assign_Cookies_DP.py
 """
 
 # ============================================
-# BRUTE FORCE APPROACH
+# OPTIMAL APPROACH (Greedy)
 # ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+# Time Complexity: O(N log N + M log M)
+# Space Complexity: O(1)
+def optimal_solution(g: list[int], s: list[int]) -> int:
+    g.sort()
+    s.sort()
+    child = 0
+    cookie = 0
+    while child < len(g) and cookie < len(s):
+        if s[cookie] >= g[child]:
+            child += 1
+        cookie += 1
+    return child
 
 # ============================================
-# OPTIMAL APPROACH
-# ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
-
-# ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Assign Cookies DP...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 2, 3], [1, 1]) == 1
+    assert optimal_solution([1, 2], [1, 2, 3]) == 2
     print("Done.")

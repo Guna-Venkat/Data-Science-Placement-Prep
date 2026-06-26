@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Best time to buy and sell stock IV
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
+Problem Name: Best Time to Buy and Sell Stock IV
+Description: Maximize profit making at most K transactions.
 
 Folder: Dynamic_Programming
-File: 440_Best_time_to_buy_and_sell_stock_IV.md
+File: 440_Best_time_to_buy_and_sell_stock_IV.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * K)
+# Space Complexity: O(K)
+def optimal_solution(k: int, prices: list[int]) -> int:
+    if not prices:
+        return 0
+    costs = [float('inf')] * k
+    profits = [0] * k
+    for price in prices:
+        for i in range(k):
+            prev_profit = profits[i - 1] if i > 0 else 0
+            costs[i] = min(costs[i], price - prev_profit)
+            profits[i] = max(profits[i], price - costs[i])
+    return profits[-1] if k > 0 else 0
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Best time to buy and sell stock IV...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(2, [3, 2, 6, 5, 0, 3]) == 7
     print("Done.")

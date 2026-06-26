@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Distinct subsequences
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/distinct-subsequences/
+Problem Name: Distinct Subsequences
+Description: Count number of times string T appears as subsequence in string S.
 
 Folder: Dynamic_Programming
-File: 434_Distinct_subsequences.md
+File: 434_Distinct_subsequences.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * M)
+# Space Complexity: O(M)
+def optimal_solution(s: str, t: str) -> int:
+    m = len(t)
+    dp = [0] * (m + 1)
+    dp[0] = 1 # Empty string t is always a subsequence
+    
+    for char in s:
+        # Backwards iteration to use single row
+        for j in range(m, 0, -1):
+            if char == t[j - 1]:
+                dp[j] = dp[j] + dp[j - 1]
+    return dp[m]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Distinct subsequences...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("rabbbit", "rabbit") == 3
     print("Done.")

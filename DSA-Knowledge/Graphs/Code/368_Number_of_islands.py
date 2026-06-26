@@ -1,44 +1,42 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Number of islands
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/number-of-islands/
+Problem Name: Number of Islands
+Description: Find total connected components of 1s in a grid (4 directions).
 
 Folder: Graphs
-File: 368_Number_of_islands.md
+File: 368_Number_of_islands.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(R * C)
+# Space Complexity: O(R * C)
+def optimal_solution(grid: list[list[str]]) -> int:
+    if not grid:
+        return 0
+    rows, cols = len(grid), len(grid[0])
+    islands = 0
+    
+    def dfs(r, c):
+        grid[r][c] = "0"
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == "1":
+                dfs(nr, nc)
+                
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == "1":
+                islands += 1
+                dfs(r, c)
+    return islands
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Number of islands...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    grid = [["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]
+    assert optimal_solution(grid) == 3
     print("Done.")

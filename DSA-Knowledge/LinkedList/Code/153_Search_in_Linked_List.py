@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/search-in-linked-list-1664434326/1
 Problem Name: Search in Linked List
-Description: Problem description goes here.
+Description: Return True if a node with value X exists in the linked list, else False.
 
 Folder: LinkedList
-File: 153_Search_in_Linked_List.md
+File: 153_Search_in_Linked_List.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode, x: int) -> bool:
+    curr = head
+    while curr:
+        if curr.val == x:
+            return True
+        curr = curr.next
+    return False
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Search in Linked List...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3)))
+    assert optimal_solution(head, 2) == True
+    assert optimal_solution(head, 5) == False
     print("Done.")

@@ -1,56 +1,56 @@
 ID,Problem,Difficulty,Pattern,Status,Time_Complexity,Space_Complexity
-404,404_Introduction_to_DP,,,,,
-405,405_Climbing_Stairs,,,,,
-406,406_Frog_Jump,,,,,
-407,407_Frog_Jump_with_K_Distance,,,,,
-408,408_Maximum_Sum_of_Non_Adjacent_Elements,,,,,
-409,409_House_Robber,,,,,
-410,410_Ninjas_training,,,,,
-411,411_Grid_Unique_Paths_DP_on_Grids_DP8,,,,,
-412,412_Unique_paths_II,,,,,
-413,413_Minimum_Falling_Path_Sum,,,,,
-414,414_Triangle,,,,,
-415,415_Ninja_and_his_Friends,,,,,
-416,416_Subset_sum_equal_to_target_DP_14,,,,,
-417,417_Partition_equal_subset_sum,,,,,
-418,418_Partition_a_set_into_two_subsets_with_minimum_absolute_sum_difference,,,,,
-419,419_Count_subsets_with_sum_K,,,,,
-420,420_Count_partitions_with_given_difference,,,,,
-421,421_Assign_Cookies_DP,,,,,
-422,422_Minimum_Coins_DP_20,,,,,
-423,423_Target_sum,,,,,
-424,424_Coin_Change_2_DP_22,,,,,
-425,425_Unbounded_knapsack,,,,,
-426,426_Rod_Cutting_Problem_DP_24,,,,,
-427,427_Longest_common_subsequence,,,,,
-428,428_Print_Longest_Common_Subsequence_DP_26,,,,,
-429,429_Longest_common_substring,,,,,
-430,430_Longest_palindromic_subsequence,,,,,
-431,431_Minimum_insertions_to_make_string_palindrome_DP_29,,,,,
-432,432_Minimum_insertions_or_deletions_to_convert_string_A_to_B,,,,,
-433,433_Shortest_common_supersequence,,,,,
-434,434_Distinct_subsequences,,,,,
-435,435_Edit_distance,,,,,
-436,436_Wildcard_matching,,,,,
-437,437_Best_time_to_buy_and_sell_stock,,,,,
-438,438_Best_time_to_buy_and_sell_stock_II,,,,,
-439,439_Best_time_to_buy_and_sell_stock_III,,,,,
-440,440_Best_time_to_buy_and_sell_stock_IV,,,,,
-441,441_Best_Time_to_Buy_and_Sell_Stock_with_Cooldown,,,,,
-442,442_Best_time_to_buy_and_sell_stock_with_transaction_fees,,,,,
-443,443_Longest_Increasing_Subsequence,,,,,
-444,444_Print_Longest_Increasing_Subsequence,,,,,
-445,445_Longest_Increasing_Subsequence_DP_43,,,,,
-446,446_Largest_Divisible_Subset,,,,,
-447,447_Longest_String_Chain,,,,,
-448,448_Longest_Bitonic_Subsequence,,,,,
-449,449_Number_of_Longest_Increasing_Subsequences,,,,,
-450,450_Matrix_chain_multiplication,,,,,
-451,451_Matrix_Chain_Multiplication_Bottom_UpDP_49,,,,,
-452,452_Minimum_cost_to_cut_the_stick,,,,,
-453,453_Burst_balloons,,,,,
-454,454_Different_Ways_to_Evaluate_a_Boolean_Expression,,,,,
-455,455_Palindrome_partitioning_II,,,,,
-456,456_Partition_Array_for_Maximum_Sum,,,,,
-457,457_Maximum_Rectangle_Area_with_all_1sDP_55,,,,,
-458,458_Count_Square_Submatrices_with_All_OnesDP_56,,,,,
+404,404_Introduction_to_DP,Easy,Fibonacci,Completed,O(N),O(1)
+405,405_Climbing_Stairs,Easy,Fibonacci,Completed,O(N),O(1)
+406,406_Frog_Jump,Easy,Frog Jump,Completed,O(N),O(1)
+407,407_Frog_Jump_with_K_Distance,Medium,Frog Jump,Completed,O(N * K),O(N)
+408,408_Maximum_Sum_of_Non_Adjacent_Elements,Medium,House Robber,Completed,O(N),O(1)
+409,409_House_Robber,Medium,House Robber,Completed,O(N),O(1)
+410,410_Ninjas_training,Medium,Multi-State DP,Completed,O(N),O(1)
+411,411_Grid_Unique_Paths_DP_on_Grids_DP8,Medium,Grid DP,Completed,O(M * N),O(N)
+412,412_Unique_paths_II,Medium,Grid DP,Completed,O(M * N),O(N)
+413,413_Minimum_Falling_Path_Sum,Medium,Grid DP,Completed,O(N^2),O(N)
+414,414_Triangle,Medium,Grid DP,Completed,O(N^2),O(N)
+415,415_Ninja_and_his_Friends,Hard,3D Grid DP,Completed,O(R * C^2),O(C^2)
+416,416_Subset_sum_equal_to_target_DP_14,Medium,Subsets,Completed,O(N * T),O(T)
+417,417_Partition_equal_subset_sum,Medium,Subsets,Completed,O(N * T),O(T)
+418,418_Partition_a_set_into_two_subsets_with_minimum_absolute_sum_difference,Medium,Subsets,Completed,O(N * T),O(T)
+419,419_Count_subsets_with_sum_K,Medium,Subsets,Completed,O(N * K),O(K)
+420,420_Count_partitions_with_given_difference,Medium,Subsets,Completed,O(N * T),O(T)
+421,421_Assign_Cookies_DP,Easy,Greedy,Completed,O(N log N),O(1)
+422,422_Minimum_Coins_DP_20,Medium,Subsets / Coins,Completed,O(N * A),O(A)
+423,423_Target_sum,Medium,Subsets,Completed,O(N * T),O(T)
+424,424_Coin_Change_2_DP_22,Medium,Subsets / Coins,Completed,O(N * A),O(A)
+425,425_Unbounded_knapsack,Medium,Unbounded Knapsack,Completed,O(N * W),O(W)
+426,426_Rod_Cutting_Problem_DP_24,Medium,Rod Cutting,Completed,O(N^2),O(N)
+427,427_Longest_common_subsequence,Medium,Strings / LCS,Completed,O(N * M),O(M)
+428,428_Print_Longest_Common_Subsequence_DP_26,Medium,Strings / LCS,Completed,O(N * M),O(N * M)
+429,429_Longest_common_substring,Medium,Strings / LCS,Completed,O(N * M),O(M)
+430,430_Longest_palindromic_subsequence,Medium,Strings / LCS,Completed,O(N^2),O(N)
+431,431_Minimum_insertions_to_make_string_palindrome_DP_29,Medium,Strings / LCS,Completed,O(N^2),O(N)
+432,432_Minimum_insertions_or_deletions_to_convert_string_A_to_B,Medium,Strings / LCS,Completed,O(N * M),O(M)
+433,433_Shortest_common_supersequence,Hard,Strings / LCS,Completed,O(N * M),O(N * M)
+434,434_Distinct_subsequences,Hard,Strings,Completed,O(N * M),O(M)
+435,435_Edit_distance,Hard,Strings / Edit Distance,Completed,O(N * M),O(M)
+436,436_Wildcard_matching,Hard,Strings / Wildcard,Completed,O(N * M),O(M)
+437,437_Best_time_to_buy_and_sell_stock,Easy,Stocks,Completed,O(N),O(1)
+438,438_Best_time_to_buy_and_sell_stock_II,Medium,Stocks,Completed,O(N),O(1)
+439,439_Best_time_to_buy_and_sell_stock_III,Hard,Stocks,Completed,O(N),O(1)
+440,440_Best_time_to_buy_and_sell_stock_IV,Hard,Stocks,Completed,O(N * K),O(K)
+441,441_Best_Time_to_Buy_and_Sell_Stock_with_Cooldown,Medium,Stocks,Completed,O(N),O(1)
+442,442_Best_time_to_buy_and_sell_stock_with_transaction_fees,Medium,Stocks,Completed,O(N),O(1)
+443,443_Longest_Increasing_Subsequence,Medium,LIS,Completed,O(N^2),O(N)
+444,444_Print_Longest_Increasing_Subsequence,Medium,LIS,Completed,O(N^2),O(N)
+445,445_Longest_Increasing_Subsequence_DP_43,Medium,LIS / Binary Search,Completed,O(N log N),O(N)
+446,446_Largest_Divisible_Subset,Medium,LIS,Completed,O(N^2),O(N)
+447,447_Longest_String_Chain,Medium,LIS / String Chain,Completed,O(N * L^2),O(N)
+448,448_Longest_Bitonic_Subsequence,Medium,LIS / Bitonic,Completed,O(N^2),O(N)
+449,449_Number_of_Longest_Increasing_Subsequences,Medium,LIS,Completed,O(N^2),O(N)
+450,450_Matrix_chain_multiplication,Medium,MCM,Completed,O(N^3),O(N^2)
+451,451_Matrix_Chain_Multiplication_Bottom_UpDP_49,Medium,MCM,Completed,O(N^3),O(N^2)
+452,452_Minimum_cost_to_cut_the_stick,Hard,MCM,Completed,O(M^3),O(M^2)
+453,453_Burst_balloons,Hard,MCM,Completed,O(N^3),O(N^2)
+454,454_Different_Ways_to_Evaluate_a_Boolean_Expression,Hard,MCM,Completed,O(N^3),O(N^2)
+455,455_Palindrome_partitioning_II,Hard,MCM / Palindrome cuts,Completed,O(N^2),O(N^2)
+456,456_Partition_Array_for_Maximum_Sum,Medium,MCM / Partition,Completed,O(N * K),O(N)
+457,457_Maximum_Rectangle_Area_with_all_1sDP_55,Hard,2D Grid DP / Histogram,Completed,O(R * C),O(C)
+458,458_Count_Square_Submatrices_with_All_OnesDP_56,Medium,2D Grid DP,Completed,O(R * C),O(C)

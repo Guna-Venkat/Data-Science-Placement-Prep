@@ -1,44 +1,34 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Longest common substring
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/longest-common-substring1452/1
+Problem Name: Longest Common Substring
+Description: Find length of longest common substring of two strings.
 
 Folder: Dynamic_Programming
-File: 429_Longest_common_substring.md
+File: 429_Longest_common_substring.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * M)
+# Space Complexity: O(M)
+def optimal_solution(s1: str, s2: str) -> int:
+    m = len(s2)
+    dp = [0] * (m + 1)
+    max_len = 0
+    for char in s1:
+        next_dp = [0] * (m + 1)
+        for j in range(1, m + 1):
+            if char == s2[j - 1]:
+                next_dp[j] = 1 + dp[j - 1]
+                max_len = max(max_len, next_dp[j])
+        dp = next_dp
+    return max_len
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Longest common substring...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("ABCDGH", "ACDGHR") == 4 # "CDGH"
     print("Done.")

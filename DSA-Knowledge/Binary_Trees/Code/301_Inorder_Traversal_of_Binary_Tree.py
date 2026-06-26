@@ -1,44 +1,39 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Inorder Traversal of Binary Tree
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/binary-tree-inorder-traversal/
+Problem Name: Binary Tree Inorder Traversal
+Description: Recursive inorder traversal.
 
 Folder: Binary_Trees
-File: 301_Inorder_Traversal_of_Binary_Tree.md
+File: 301_Inorder_Traversal_of_Binary_Tree.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(H)
+def optimal_solution(root: TreeNode) -> list[int]:
+    res = []
+    def inorder(node):
+        if not node:
+            return
+        inorder(node.left)
+        res.append(node.val)
+        inorder(node.right)
+    inorder(root)
+    return res
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Inorder Traversal of Binary Tree...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(1, None, TreeNode(2, TreeNode(3)))
+    assert optimal_solution(root) == [1, 3, 2]
     print("Done.")

@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
-Problem Name: Floyd warshall algorithm
-Description: All-pairs shortest path using DP.
+LeetCode Link: https://www.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1
+Problem Name: Floyd Warshall Algorithm
+Description: All-pairs shortest path in-place grid update.
 
 Folder: Graphs
-File: 389_Floyd_warshall_algorithm.md
+File: 389_Floyd_warshall_algorithm.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(V^3)
+# Space Complexity: O(1) in-place updates
+def optimal_solution(matrix: list[list[int]]) -> None:
+    v = len(matrix)
+    for k in range(v):
+        for i in range(v):
+            for j in range(v):
+                if matrix[i][k] != -1 and matrix[k][j] != -1:
+                    val = matrix[i][k] + matrix[k][j]
+                    if matrix[i][j] == -1 or matrix[i][j] > val:
+                        matrix[i][j] = val
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Floyd warshall algorithm...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    matrix = [[0, 2, -1], [-1, 0, 3], [1, -1, 0]]
+    optimal_solution(matrix)
+    assert matrix[0][2] == 5 # 0-1-2 path
     print("Done.")

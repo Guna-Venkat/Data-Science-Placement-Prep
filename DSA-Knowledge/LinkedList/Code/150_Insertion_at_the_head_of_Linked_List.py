@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/linked-list-insertion/1
 Problem Name: Insertion at the head of Linked List
-Description: Problem description goes here.
+Description: Insert a node with value X at the head of a linked list.
 
 Folder: LinkedList
-File: 150_Insertion_at_the_head_of_Linked_List.md
+File: 150_Insertion_at_the_head_of_Linked_List.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode, x: int) -> ListNode:
+    new_node = ListNode(x)
+    new_node.next = head
+    return new_node
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Insertion at the head of Linked List...")
+    print("Running tests...")
+    head = ListNode(2)
+    head.next = ListNode(3)
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    new_head = optimal_solution(head, 1)
+    assert new_head.val == 1
+    assert new_head.next.val == 2
     print("Done.")

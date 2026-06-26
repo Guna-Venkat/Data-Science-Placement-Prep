@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Minimum cost to cut the stick
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/minimum-cost-to-cut-a-stick/
+Problem Name: Minimum Cost to Cut a Stick
+Description: Find minimal cost to make all cuts on a stick of length N.
 
 Folder: Dynamic_Programming
-File: 452_Minimum_cost_to_cut_the_stick.md
+File: 452_Minimum_cost_to_cut_the_stick.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Sort cuts. Append 0 and N to cuts array. Partition space.
+# Time Complexity: O(M^3) where M is cuts length
+# Space Complexity: O(M^2)
+def optimal_solution(n: int, cuts: list[int]) -> int:
+    cuts = [0] + sorted(cuts) + [n]
+    m = len(cuts)
+    dp = [[0] * m for _ in range(m)]
+    
+    for length in range(2, m):
+        for i in range(m - length):
+            j = i + length
+            dp[i][j] = float('inf')
+            for k in range(i + 1, j):
+                dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j] + cuts[j] - cuts[i])
+                
+    return dp[0][m - 1]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Minimum cost to cut the stick...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(7, [1, 3, 4, 5]) == 16
     print("Done.")

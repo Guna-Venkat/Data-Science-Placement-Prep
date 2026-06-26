@@ -1,44 +1,40 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Reverse a LinkedList Iterative
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/reverse-linked-list/
+Problem Name: Reverse Linked List (Iterative)
+Description: Reverse a singly linked list in-place iteratively.
 
 Folder: LinkedList
-File: 159_Reverse_a_LinkedList_Iterative.md
+File: 159_Reverse_a_LinkedList_Iterative.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Maintain three pointers: prev, curr, temp.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> ListNode:
+    prev = None
+    curr = head
+    while curr:
+        temp = curr.next
+        curr.next = prev
+        prev = curr
+        curr = temp
+    return prev
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Reverse a LinkedList Iterative...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3)))
+    rev = optimal_solution(head)
+    assert rev.val == 3
+    assert rev.next.val == 2
     print("Done.")

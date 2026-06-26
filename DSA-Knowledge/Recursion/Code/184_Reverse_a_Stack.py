@@ -1,44 +1,38 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/reverse-a-stack/1
 Problem Name: Reverse a Stack
-Description: Problem description goes here.
+Description: Reverse a stack recursively without loops.
 
 Folder: Recursion
-File: 184_Reverse_a_Stack.md
+File: 184_Reverse_a_Stack.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Pop top, recursively reverse remaining stack, then insert popped element at bottom.
+# Time Complexity: O(N^2)
+# Space Complexity: O(N) recursion stack
+def insert_at_bottom(stack: list[int], val: int):
+    if not stack:
+        stack.append(val)
+        return
+    temp = stack.pop()
+    insert_at_bottom(stack, val)
+    stack.append(temp)
+
+def optimal_solution(stack: list[int]) -> list[int]:
+    if not stack:
+        return stack
+    temp = stack.pop()
+    optimal_solution(stack)
+    insert_at_bottom(stack, temp)
+    return stack
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Reverse a Stack...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([3, 2, 1]) == [1, 2, 3] # reversed stack representation
     print("Done.")

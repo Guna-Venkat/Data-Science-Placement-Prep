@@ -1,44 +1,40 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Detect a loop in LL
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/linked-list-cycle/
+Problem Name: Linked List Cycle
+Description: Detect if a linked list contains a loop/cycle.
 
 Folder: LinkedList
-File: 161_Detect_a_loop_in_LL.md
+File: 161_Detect_a_loop_in_LL.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Tortoise and Hare. If there is a cycle, slow and fast pointers will meet.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> bool:
+    slow = head
+    fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Detect a loop in LL...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = head # loop back to head
+    assert optimal_solution(head) == True
     print("Done.")

@@ -1,44 +1,41 @@
 """
-LeetCode Problem: https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/
-Problem Name: Matrix chain multiplication
-Description: Minimize cost of multiplying matrices using MCM DP.
+LeetCode Link: https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
+Problem Name: Matrix Chain Multiplication (MCM)
+Description: Find minimal cost to multiply matrices.
 
 Folder: Dynamic_Programming
-File: 450_Matrix_chain_multiplication.md
+File: 450_Matrix_chain_multiplication.py
 """
 
 # ============================================
-# BRUTE FORCE APPROACH
+# OPTIMAL APPROACH (Memoized Top-Down)
 # ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+# Time Complexity: O(N^3)
+# Space Complexity: O(N^2)
+def optimal_solution(arr: list[int]) -> int:
+    n = len(arr)
+    memo = {}
+    
+    def solve(i, j):
+        if i == j:
+            return 0
+        if (i, j) in memo:
+            return memo[(i, j)]
+            
+        min_cost = float('inf')
+        for k in range(i, j):
+            cost = solve(i, k) + solve(k + 1, j) + arr[i-1] * arr[k] * arr[j]
+            min_cost = min(min_cost, cost)
+            
+        memo[(i, j)] = min_cost
+        return min_cost
+
+    return solve(1, n - 1)
 
 # ============================================
-# OPTIMAL APPROACH
-# ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
-
-# ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Matrix chain multiplication...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([40, 20, 30, 10, 30]) == 26000
     print("Done.")

@@ -1,44 +1,71 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Check if LL is palindrome or not
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/palindrome-linked-list/
+Problem Name: Palindrome Linked List
+Description: Check if a singly linked list is a palindrome.
 
 Folder: LinkedList
-File: 164_Check_if_LL_is_palindrome_or_not.md
+File: 164_Check_if_LL_is_palindrome_or_not.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Find middle, reverse second half, compare both halves. Restore list if needed.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> bool:
+    if not head or not head.next:
+        return True
+        
+    # Find middle
+    slow = head
+    fast = head
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+    # Reverse second half
+    def reverse(node):
+        prev = None
+        curr = node
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        return prev
+
+    second_head = reverse(slow.next)
+    
+    # Compare
+    first = head
+    second = second_head
+    is_palindrome = True
+    while second:
+        if first.val != second.val:
+            is_palindrome = False
+            break
+        first = first.next
+        second = second.next
+        
+    # Restore (optional but good practice)
+    slow.next = reverse(second_head)
+    
+    return is_palindrome
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Check if LL is palindrome or not...")
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(2, ListNode(1))))
+    assert optimal_solution(head) == True
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    head2 = ListNode(1, ListNode(2, ListNode(3)))
+    assert optimal_solution(head2) == False
     print("Done.")

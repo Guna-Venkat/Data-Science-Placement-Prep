@@ -1,44 +1,56 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/word-search/
 Problem Name: Word Search
-Description: Problem description goes here.
+Description: Return True if a word exists in a 2D board.
 
 Folder: Recursion
-File: 198_Word_Search.md
+File: 198_Word_Search.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: DFS backtracking. Mark cells visited by changing value, then restore (backtrack).
+# Time Complexity: O(R * C * 4^L) where L is length of word
+# Space Complexity: O(L) recursion stack depth
+def optimal_solution(board: list[list[str]], word: str) -> bool:
+    if not board:
+        return False
+        
+    rows = len(board)
+    cols = len(board[0])
+    
+    def dfs(r, c, idx):
+        if idx == len(word):
+            return True
+        if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != word[idx]:
+            return False
+            
+        temp = board[r][c]
+        board[r][c] = "#" # mark visited
+        
+        # Directions
+        found = (dfs(r+1, c, idx+1) or
+                 dfs(r-1, c, idx+1) or
+                 dfs(r, c+1, idx+1) or
+                 dfs(r, c-1, idx+1))
+                 
+        board[r][c] = temp # backtrack
+        return found
+
+    for r in range(rows):
+        for c in range(cols):
+            if dfs(r, c, 0):
+                return True
+    return False
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Word Search...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+    assert optimal_solution(board, "ABCCED") == True
+    assert optimal_solution(board, "SEE") == True
+    assert optimal_solution(board, "ABCB") == False
     print("Done.")

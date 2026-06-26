@@ -1,44 +1,39 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/doubly-linked-list-insertion-at-given-position/1
 Problem Name: Insert node before head in Doubly Linked List
-Description: Problem description goes here.
+Description: Insert a new node before the head of a doubly linked list.
 
 Folder: LinkedList
-File: 155_Insert_node_before_head_in_Doubly_Linked_List.md
+File: 155_Insert_node_before_head_in_Doubly_Linked_List.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class DLLNode:
+    def __init__(self, val=0, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+def optimal_solution(head: DLLNode, val: int) -> DLLNode:
+    new_node = DLLNode(val)
+    if not head:
+        return new_node
+    new_node.next = head
+    head.prev = new_node
+    return new_node
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Insert node before head in Doubly Linked List...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = DLLNode(2)
+    new_head = optimal_solution(head, 1)
+    assert new_head.val == 1
+    assert new_head.next.val == 2
+    assert new_head.next.prev.val == 1
     print("Done.")

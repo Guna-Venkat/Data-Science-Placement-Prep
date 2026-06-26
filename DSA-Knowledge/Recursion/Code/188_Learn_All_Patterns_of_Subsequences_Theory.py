@@ -1,44 +1,40 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Learn All Patterns of Subsequences Theory
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/subsets/
+Problem Name: Subsequences Theory
+Description: Explain and demonstrate picking/non-picking recursion patterns.
 
 Folder: Recursion
-File: 188_Learn_All_Patterns_of_Subsequences_Theory.md
+File: 188_Learn_All_Patterns_of_Subsequences_Theory.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(2^N)
+# Space Complexity: O(N) recursion stack
+def optimal_solution(arr: list[int]) -> list[list[int]]:
+    subsequences = []
+    
+    def dfs(idx, curr):
+        if idx == len(arr):
+            subsequences.append(list(curr))
+            return
+            
+        # Pick
+        curr.append(arr[idx])
+        dfs(idx + 1, curr)
+        curr.pop()
+        
+        # Don't pick
+        dfs(idx + 1, curr)
+
+    dfs(0, [])
+    return subsequences
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Learn All Patterns of Subsequences Theory...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert len(optimal_solution([1, 2, 3])) == 8
     print("Done.")

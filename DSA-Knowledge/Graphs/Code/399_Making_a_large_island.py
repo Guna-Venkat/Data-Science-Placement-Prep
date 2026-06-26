@@ -1,44 +1,59 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Making a large island
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/making-a-large-island/
+Problem Name: Making a Large Island
+Description: Change at most one 0 to 1. Find size of largest island possible.
 
 Folder: Graphs
-File: 399_Making_a_large_island.md
+File: 399_Making_a_large_island.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Color islands with unique IDs. Map ID to component size. 
+# For each 0, sum sizes of unique neighbor island IDs.
+# Time Complexity: O(N^2)
+# Space Complexity: O(N^2)
+def optimal_solution(grid: list[list[int]]) -> int:
+    n = len(grid)
+    island_sizes = {}
+    color = 2
+    
+    def dfs(r, c, clr):
+        grid[r][c] = clr
+        size = 1
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] == 1:
+                size += dfs(nr, nc, clr)
+        return size
+        
+    for r in range(n):
+        for c in range(n):
+            if grid[r][c] == 1:
+                size = dfs(r, c, color)
+                island_sizes[color] = size
+                color += 1
+                
+    max_island = max(island_sizes.values()) if island_sizes else 0
+    
+    for r in range(n):
+        for c in range(n):
+            if grid[r][c] == 0:
+                neighbor_colors = set()
+                for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < n and 0 <= nc < n and grid[nr][nc] > 1:
+                        neighbor_colors.add(grid[nr][nc])
+                size = 1 + sum(island_sizes[clr] for clr in neighbor_colors)
+                max_island = max(max_island, size)
+    return max_island
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Making a large island...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    grid = [[1, 0], [0, 1]]
+    assert optimal_solution(grid) == 3
     print("Done.")

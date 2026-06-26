@@ -1,44 +1,28 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Unbounded knapsack
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/unbounded-knapsack5444/1
+Problem Name: Unbounded Knapsack
+Description: Pick items to maximize profit within capacity. Unlimited repetitions.
 
 Folder: Dynamic_Programming
-File: 425_Unbounded_knapsack.md
+File: 425_Unbounded_knapsack.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * W)
+# Space Complexity: O(W)
+def optimal_solution(val: list[int], wt: list[int], w: int) -> int:
+    dp = [0] * (w + 1)
+    for i in range(len(val)):
+        for t in range(wt[i], w + 1):
+            dp[t] = max(dp[t], val[i] + dp[t - wt[i]])
+    return dp[w]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Unbounded knapsack...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 1], [2, 1], 3) == 3
     print("Done.")

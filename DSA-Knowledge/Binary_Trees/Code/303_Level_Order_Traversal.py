@@ -1,44 +1,44 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Level Order Traversal
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/binary-tree-level-order-traversal/
+Problem Name: Binary Tree Level Order Traversal
+Description: Level order (BFS) traversal of a binary tree.
 
 Folder: Binary_Trees
-File: 303_Level_Order_Traversal.md
+File: 303_Level_Order_Traversal.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(N)
+def optimal_solution(root: TreeNode) -> list[list[int]]:
+    if not root:
+        return []
+    result = []
+    queue = [root]
+    while queue:
+        level_size = len(queue)
+        level = []
+        for _ in range(level_size):
+            node = queue.pop(0)
+            level.append(node.val)
+            if node.left: queue.append(node.left)
+            if node.right: queue.append(node.right)
+        result.append(level)
+    return result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Level Order Traversal...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
+    assert optimal_solution(root) == [[3], [9, 20], [15, 7]]
     print("Done.")

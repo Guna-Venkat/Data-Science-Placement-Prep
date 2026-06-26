@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Count all subsequences with sum K
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1
+Problem Name: Count Subsequences with Sum K
+Description: Find total subsequences whose sum equals K.
 
 Folder: Recursion
-File: 189_Count_all_subsequences_with_sum_K.md
+File: 189_Count_all_subsequences_with_sum_K.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Recursion with pick/non-pick. Return count from sub-calls.
+# Time Complexity: O(2^N)
+# Space Complexity: O(N) recursion stack
+def optimal_solution(arr: list[int], k: int) -> int:
+    def solve(idx, target):
+        if target == 0:
+            return 1
+        if idx == len(arr) or target < 0:
+            return 0
+            
+        # pick + non-pick
+        pick = solve(idx + 1, target - arr[idx])
+        non_pick = solve(idx + 1, target)
+        return pick + non_pick
+
+    return solve(0, k)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Count all subsequences with sum K...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 2, 1], 2) == 2 # [1, 1] and [2]
     print("Done.")

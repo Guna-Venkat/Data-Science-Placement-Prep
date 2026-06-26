@@ -1,44 +1,45 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/combination-sum/
 Problem Name: Combination Sum
-Description: Problem description goes here.
+Description: Find all unique combinations of candidates where candidates sum to target.
+Repeated selection allowed.
 
 Folder: Recursion
-File: 191_Combination_Sum.md
+File: 191_Combination_Sum.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Backtracking with reuse. Keep index pointer `idx` same for recursive reuse.
+# Time Complexity: O(2^T * K) where T is target / min candidate
+# Space Complexity: O(T) stack depth
+def optimal_solution(candidates: list[int], target: int) -> list[list[int]]:
+    result = []
+    
+    def backtrack(idx, target, path):
+        if target == 0:
+            result.append(list(path))
+            return
+        if idx == len(candidates) or target < 0:
+            return
+            
+        # Pick current element
+        path.append(candidates[idx])
+        backtrack(idx, target - candidates[idx], path)
+        path.pop()
+        
+        # Skip current element
+        backtrack(idx + 1, target, path)
+
+    backtrack(0, target, [])
+    return result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Combination Sum...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    res = optimal_solution([2, 3, 6, 7], 7)
+    assert sorted(res) == sorted([[2, 2, 3], [7]])
     print("Done.")

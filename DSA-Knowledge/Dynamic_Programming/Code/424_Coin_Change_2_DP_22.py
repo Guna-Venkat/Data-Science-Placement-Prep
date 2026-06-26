@@ -1,44 +1,29 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Coin Change 2 DP 22
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/coin-change-ii/
+Problem Name: Coin Change 2
+Description: Number of combinations that make up amount. Unlimited reuse.
 
 Folder: Dynamic_Programming
-File: 424_Coin_Change_2_DP_22.md
+File: 424_Coin_Change_2_DP_22.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(Coins * Amount)
+# Space Complexity: O(Amount)
+def optimal_solution(amount: int, coins: list[int]) -> int:
+    dp = [0] * (amount + 1)
+    dp[0] = 1
+    for coin in coins:
+        for t in range(coin, amount + 1):
+            dp[t] += dp[t - coin]
+    return dp[amount]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Coin Change 2 DP 22...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(5, [1, 2, 5]) == 4
     print("Done.")

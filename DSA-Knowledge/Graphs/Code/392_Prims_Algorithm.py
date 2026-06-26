@@ -1,44 +1,40 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Prims Algorithm
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
+Problem Name: Prim's Algorithm (MST)
+Description: Find total weight of MST using Prim's algorithm (min heap).
 
 Folder: Graphs
-File: 392_Prims_Algorithm.md
+File: 392_Prims_Algorithm.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+import heapq
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(E log V)
+# Space Complexity: O(V)
+def optimal_solution(v: int, adj: list[list[tuple[int, int]]]) -> int:
+    visited = [False] * v
+    pq = [(0, 0)] # (weight, node)
+    mst_weight = 0
+    
+    while pq:
+        w, node = heapq.heappop(pq)
+        if visited[node]:
+            continue
+        visited[node] = True
+        mst_weight += w
+        for neighbor, weight in adj[node]:
+            if not visited[neighbor]:
+                heapq.heappush(pq, (weight, neighbor))
+    return mst_weight
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Prims Algorithm...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    adj = [[(1, 2), (2, 1)], [(0, 2), (2, 3)], [(0, 1), (1, 3)]]
+    assert optimal_solution(3, adj) == 3
     print("Done.")

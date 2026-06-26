@@ -1,44 +1,50 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Segregate odd and even nodes in Linked List
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/odd-even-linked-list/
+Problem Name: Odd Even Linked List
+Description: Group all odd-indexed nodes together followed by the even-indexed nodes.
 
 Folder: LinkedList
-File: 165_Segregate_odd_and_even_nodes_in_Linked_List.md
+File: 165_Segregate_odd_and_even_nodes_in_Linked_List.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Maintain odd and even pointers. Link odd next to even.next, etc.
+# Connect end of odd list to head of even list.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> ListNode:
+    if not head or not head.next:
+        return head
+        
+    odd = head
+    even = head.next
+    even_head = even
+    
+    while even and even.next:
+        odd.next = even.next
+        odd = odd.next
+        even.next = odd.next
+        even = even.next
+        
+    odd.next = even_head
+    return head
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Segregate odd and even nodes in Linked List...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+    res = optimal_solution(head)
+    assert res.val == 1
+    assert res.next.val == 3
+    assert res.next.next.val == 5
+    assert res.next.next.next.val == 2
     print("Done.")

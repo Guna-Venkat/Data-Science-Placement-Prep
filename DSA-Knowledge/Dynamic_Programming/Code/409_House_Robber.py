@@ -1,44 +1,37 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: House Robber
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/house-robber-ii/
+Problem Name: House Robber II
+Description: Rob houses arranged in a circle. First and last are adjacent.
 
 Folder: Dynamic_Programming
-File: 409_House_Robber.md
+File: 409_House_Robber.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def rob_linear(nums):
+    prev2, prev = 0, 0
+    for num in nums:
+        curr = max(num + prev2, prev)
+        prev2 = prev
+        prev = curr
+    return prev
+
+def optimal_solution(nums: list[int]) -> int:
+    if not nums:
+        return 0
+    if len(nums) == 1:
+        return nums[0]
+    return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for House Robber...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([2, 3, 2]) == 3
+    assert optimal_solution([1, 2, 3, 1]) == 4
     print("Done.")

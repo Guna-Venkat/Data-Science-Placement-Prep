@@ -1,44 +1,39 @@
 """
-LeetCode Problem: https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/
+LeetCode Link: https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1
 Problem Name: Bellman Ford Algorithm
-Description: Find shortest path handling negative weights.
+Description: Shortest path from source allowing negative weight edges. Returns -1 if negative cycle exists.
 
 Folder: Graphs
-File: 388_Bellman_Ford_Algorithm.md
+File: 388_Bellman_Ford_Algorithm.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Relax all edges V-1 times. Run 1 more relaxation to check for negative cycles.
+# Time Complexity: O(V * E)
+# Space Complexity: O(V)
+def optimal_solution(v: int, edges: list[list[int]], src: int) -> list[int]:
+    dist = [10**8] * v
+    dist[src] = 0
+    
+    for _ in range(v - 1):
+        for u, w, d in edges:
+            if dist[u] != 10**8 and dist[u] + d < dist[w]:
+                dist[w] = dist[u] + d
+                
+    # Check for negative cycle
+    for u, w, d in edges:
+        if dist[u] != 10**8 and dist[u] + d < dist[w]:
+            return [-1]
+            
+    return dist
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Bellman Ford Algorithm...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    edges = [[0, 1, 9]]
+    assert optimal_solution(2, edges, 0) == [0, 9]
     print("Done.")

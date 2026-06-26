@@ -1,44 +1,39 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/number-of-provinces/
 Problem Name: Connected Components
-Description: Problem description goes here.
+Description: Count number of connected components in undirected graph.
 
 Folder: Graphs
-File: 354_Connected_Components.md
+File: 354_Connected_Components.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(V + E)
+# Space Complexity: O(V)
+def optimal_solution(v: int, adj: dict[int, list[int]]) -> int:
+    visited = set()
+    count = 0
+    
+    def dfs(node):
+        for neighbor in adj[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                dfs(neighbor)
+                
+    for i in range(v):
+        if i not in visited:
+            count += 1
+            visited.add(i)
+            dfs(i)
+    return count
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Connected Components...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    adj = {0: [1], 1: [0], 2: []}
+    assert optimal_solution(3, adj) == 2
     print("Done.")

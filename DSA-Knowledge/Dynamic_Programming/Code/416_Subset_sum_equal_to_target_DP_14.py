@@ -1,44 +1,38 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Subset sum equal to target DP 14
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555635/1
+Problem Name: Subset Sum Equal to Target
+Description: Check if subset exists with sum equal to target.
 
 Folder: Dynamic_Programming
-File: 416_Subset_sum_equal_to_target_DP_14.md
+File: 416_Subset_sum_equal_to_target_DP_14.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * Target)
+# Space Complexity: O(Target)
+def optimal_solution(arr: list[int], target: int) -> bool:
+    dp = [False] * (target + 1)
+    dp[0] = True
+    if arr[0] <= target:
+        dp[arr[0]] = True
+        
+    for i in range(1, len(arr)):
+        next_dp = [False] * (target + 1)
+        next_dp[0] = True
+        for t in range(1, target + 1):
+            non_pick = dp[t]
+            pick = dp[t - arr[i]] if t >= arr[i] else False
+            next_dp[t] = pick or non_pick
+        dp = next_dp
+    return dp[target]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Subset sum equal to target DP 14...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 2, 3, 4], 6) == True
+    assert optimal_solution([1, 2, 3, 4], 11) == False
     print("Done.")

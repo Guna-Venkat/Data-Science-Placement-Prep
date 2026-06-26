@@ -1,44 +1,31 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Grid Unique Paths DP on Grids DP8
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/unique-paths/
+Problem Name: Unique Paths
+Description: Count unique paths from top-left to bottom-right in m x n grid.
 
 Folder: Dynamic_Programming
-File: 411_Grid_Unique_Paths_DP_on_Grids_DP8.md
+File: 411_Grid_Unique_Paths_DP_on_Grids_DP8.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(M * N)
+# Space Complexity: O(N)
+def optimal_solution(m: int, n: int) -> int:
+    prev = [1] * n
+    for i in range(1, m):
+        curr = [1] * n
+        for j in range(1, n):
+            curr[j] = curr[j - 1] + prev[j]
+        prev = curr
+    return prev[-1]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Grid Unique Paths DP on Grids DP8...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(3, 7) == 28
+    assert optimal_solution(3, 2) == 3
     print("Done.")

@@ -1,44 +1,37 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/minimum-falling-path-sum/
 Problem Name: Minimum Falling Path Sum
-Description: Problem description goes here.
+Description: Minimum sum of falling path from top row to bottom row.
 
 Folder: Dynamic_Programming
-File: 413_Minimum_Falling_Path_Sum.md
+File: 413_Minimum_Falling_Path_Sum.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N^2)
+# Space Complexity: O(N)
+def optimal_solution(matrix: list[list[int]]) -> int:
+    n = len(matrix)
+    prev = list(matrix[0])
+    
+    for r in range(1, n):
+        curr = [0] * n
+        for c in range(n):
+            val = matrix[r][c]
+            mid = prev[c]
+            left = prev[c - 1] if c > 0 else float('inf')
+            right = prev[c + 1] if c < n - 1 else float('inf')
+            curr[c] = val + min(mid, left, right)
+        prev = curr
+    return min(prev)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Minimum Falling Path Sum...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    matrix = [[2,1,3],[6,5,4],[7,8,9]]
+    assert optimal_solution(matrix) == 13
     print("Done.")

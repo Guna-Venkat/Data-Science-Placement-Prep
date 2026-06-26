@@ -1,44 +1,42 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Number of enclaves
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/number-of-enclaves/
+Problem Name: Number of Enclaves
+Description: Count number of 1s in a grid from which we cannot walk off boundary.
 
 Folder: Graphs
-File: 365_Number_of_enclaves.md
+File: 365_Number_of_enclaves.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Mark all boundary-connected 1s using DFS/BFS. Count remaining 1s.
+# Time Complexity: O(R * C)
+# Space Complexity: O(R * C)
+def optimal_solution(grid: list[list[int]]) -> int:
+    rows, cols = len(grid), len(grid[0])
+    
+    def dfs(r, c):
+        grid[r][c] = 0
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1:
+                dfs(nr, nc)
+                
+    for r in range(rows):
+        if grid[r][0] == 1: dfs(r, 0)
+        if grid[r][cols - 1] == 1: dfs(r, cols - 1)
+    for c in range(cols):
+        if grid[0][c] == 1: dfs(0, c)
+        if grid[rows - 1][c] == 1: dfs(rows - 1, c)
+        
+    return sum(sum(row) for row in grid)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Number of enclaves...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    grid = [[0,0,0,0],[1,0,1,0],[0,1,1,0],[0,0,0,0]]
+    assert optimal_solution(grid) == 3
     print("Done.")

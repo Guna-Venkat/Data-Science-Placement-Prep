@@ -1,44 +1,45 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Print root to leaf path in BT
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1
+Problem Name: Root to Leaf Paths
+Description: Find all paths from root to leaf nodes.
 
 Folder: Binary_Trees
-File: 321_Print_root_to_leaf_path_in_BT.md
+File: 321_Print_root_to_leaf_path_in_BT.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(H)
+def optimal_solution(root: TreeNode) -> list[list[int]]:
+    result = []
+    
+    def dfs(node, path):
+        if not node:
+            return
+        path.append(node.val)
+        if not node.left and not node.right:
+            result.append(list(path))
+        else:
+            dfs(node.left, path)
+            dfs(node.right, path)
+        path.pop()
+
+    dfs(root, [])
+    return result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Print root to leaf path in BT...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3))
+    assert optimal_solution(root) == [[1, 2, 4], [1, 2, 5], [1, 3]]
     print("Done.")

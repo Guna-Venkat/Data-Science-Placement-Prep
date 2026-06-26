@@ -1,44 +1,48 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Maximum Rectangle Area with all 1sDP 55
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/maximal-rectangle/
+Problem Name: Maximal Rectangle Area with all 1s
+Description: Find largest rectangle area containing only 1s in a 2D matrix.
 
 Folder: Dynamic_Programming
-File: 457_Maximum_Rectangle_Area_with_all_1sDP_55.md
+File: 457_Maximum_Rectangle_Area_with_all_1sDP_55.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: For each row, construct heights array (histogram). Find max area in histogram.
+# Time Complexity: O(R * C)
+# Space Complexity: O(C)
+def max_histogram_area(heights):
+    stack = []
+    max_area = 0
+    heights.append(0)
+    for i, h in enumerate(heights):
+        while stack and heights[stack[-1]] > h:
+            height = heights[stack.pop()]
+            width = i if not stack else (i - stack[-1] - 1)
+            max_area = max(max_area, height * width)
+        stack.append(i)
+    heights.pop()
+    return max_area
+
+def optimal_solution(matrix: list[list[str]]) -> int:
+    if not matrix or not matrix[0]:
+        return 0
+    cols = len(matrix[0])
+    heights = [0] * cols
+    max_rect = 0
+    for row in matrix:
+        for c in range(cols):
+            heights[c] = heights[c] + 1 if row[c] == "1" else 0
+        max_rect = max(max_rect, max_histogram_area(heights))
+    return max_rect
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Maximum Rectangle Area with all 1sDP 55...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+    assert optimal_solution(matrix) == 6
     print("Done.")

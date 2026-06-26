@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/partition-array-for-maximum-sum/
 Problem Name: Partition Array for Maximum Sum
-Description: Problem description goes here.
+Description: Partition array into subarrays of at most length k. Maximize sum of elements.
 
 Folder: Dynamic_Programming
-File: 456_Partition_Array_for_Maximum_Sum.md
+File: 456_Partition_Array_for_Maximum_Sum.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * K)
+# Space Complexity: O(N)
+def optimal_solution(arr: list[int], k: int) -> int:
+    n = len(arr)
+    dp = [0] * (n + 1)
+    
+    for i in range(1, n + 1):
+        curr_max = 0
+        for j in range(1, min(i, k) + 1):
+            curr_max = max(curr_max, arr[i - j])
+            dp[i] = max(dp[i], dp[i - j] + curr_max * j)
+            
+    return dp[n]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Partition Array for Maximum Sum...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 15, 7, 9, 2, 5, 10], 3) == 84
     print("Done.")

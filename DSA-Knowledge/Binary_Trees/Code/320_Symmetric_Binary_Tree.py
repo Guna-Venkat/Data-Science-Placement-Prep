@@ -1,44 +1,43 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Symmetric Binary Tree
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/symmetric-tree/
+Problem Name: Symmetric Tree
+Description: Check if a binary tree is symmetric (mirror image of itself).
 
 Folder: Binary_Trees
-File: 320_Symmetric_Binary_Tree.md
+File: 320_Symmetric_Binary_Tree.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(H)
+def optimal_solution(root: TreeNode) -> bool:
+    if not root:
+        return True
+        
+    def is_mirror(t1, t2):
+        if not t1 and not t2:
+            return True
+        if not t1 or not t2:
+            return False
+        return (t1.val == t2.val and 
+                is_mirror(t1.left, t2.right) and 
+                is_mirror(t1.right, t2.left))
+
+    return is_mirror(root.left, root.right)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Symmetric Binary Tree...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(1, TreeNode(2, TreeNode(3), TreeNode(4)), TreeNode(2, TreeNode(4), TreeNode(3)))
+    assert optimal_solution(root) == True
     print("Done.")

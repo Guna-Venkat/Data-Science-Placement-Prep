@@ -1,44 +1,39 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/generate-all-binary-strings/1
 Problem Name: Generate Binary Strings Without Consecutive 1s
-Description: Problem description goes here.
+Description: Generate all binary strings of length K without consecutive 1s.
 
 Folder: Recursion
-File: 185_Generate_Binary_Strings_Without_Consecutive_1s.md
+File: 185_Generate_Binary_Strings_Without_Consecutive_1s.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(2^K)
+# Space Complexity: O(K) recursion stack
+def optimal_solution(k: int) -> list[str]:
+    result = []
+    
+    def generate(curr_str):
+        if len(curr_str) == k:
+            result.append(curr_str)
+            return
+            
+        # We can always append '0'
+        generate(curr_str + "0")
+        
+        # We can only append '1' if last char is not '1'
+        if not curr_str or curr_str[-1] != "1":
+            generate(curr_str + "1")
+
+    generate("")
+    return result
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Generate Binary Strings Without Consecutive 1s...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert sorted(optimal_solution(3)) == sorted(["000", "001", "010", "100", "101"])
     print("Done.")

@@ -1,44 +1,30 @@
 """
-LeetCode Problem: https://leetcode.com/problems/coin-change/
-Problem Name: Minimum Coins DP 20
-Description: Find minimum coins to make amount using unlimited coins.
+LeetCode Link: https://leetcode.com/problems/coin-change/
+Problem Name: Coin Change (Minimum Coins)
+Description: Fewest number of coins needed to make up amount.
 
 Folder: Dynamic_Programming
-File: 422_Minimum_Coins_DP_20.md
+File: 422_Minimum_Coins_DP_20.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(Coins * Amount)
+# Space Complexity: O(Amount)
+def optimal_solution(coins: list[int], amount: int) -> int:
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+    for coin in coins:
+        for t in range(coin, amount + 1):
+            dp[t] = min(dp[t], 1 + dp[t - coin])
+    return dp[amount] if dp[amount] != float('inf') else -1
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Minimum Coins DP 20...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 2, 5], 11) == 3
+    assert optimal_solution([2], 3) == -1
     print("Done.")

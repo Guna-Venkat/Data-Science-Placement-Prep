@@ -1,44 +1,75 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Clone a LL with random and next pointer
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/copy-list-with-random-pointer/
+Problem Name: Copy List with Random Pointer
+Description: Deep copy a linked list where each node has a next and random pointer.
 
 Folder: LinkedList
-File: 179_Clone_a_LL_with_random_and_next_pointer.md
+File: 179_Clone_a_LL_with_random_and_next_pointer.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None, random=None):
+        self.val = val
+        self.next = next
+        self.random = random
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: 
+# 1. Create duplicate node next to each original node: A -> A' -> B -> B'
+# 2. Assign random pointers: node.next.random = node.random.next (if exists)
+# 3. Separate original and cloned lists.
+# Time Complexity: O(N)
+# Space Complexity: O(1) auxiliary space (excluding clone allocation)
+def optimal_solution(head: ListNode) -> ListNode:
+    if not head:
+        return None
+        
+    # Step 1: Duplicate nodes
+    curr = head
+    while curr:
+        temp = curr.next
+        curr.next = ListNode(curr.val, next=temp)
+        curr = temp
+        
+    # Step 2: Assign random pointers
+    curr = head
+    while curr:
+        if curr.random:
+            curr.next.random = curr.random.next
+        curr = curr.next.next
+        
+    # Step 3: Separate lists
+    dummy = ListNode(0)
+    copy_curr = dummy
+    curr = head
+    while curr:
+        temp = curr.next.next
+        
+        # Link copy
+        copy_curr.next = curr.next
+        copy_curr = copy_curr.next
+        
+        # Restore original
+        curr.next = temp
+        curr = temp
+        
+    return dummy.next
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Clone a LL with random and next pointer...")
+    print("Running tests...")
+    n1 = ListNode(1)
+    n2 = ListNode(2)
+    n1.next = n2
+    n1.random = n2 # 1's random is 2
+    n2.random = n2 # 2's random is 2
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    clone = optimal_solution(n1)
+    assert clone.val == 1
+    assert clone.next.val == 2
+    assert clone.random.val == 2
     print("Done.")

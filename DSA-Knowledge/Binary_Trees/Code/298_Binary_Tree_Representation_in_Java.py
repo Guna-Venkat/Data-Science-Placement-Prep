@@ -1,44 +1,48 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Binary Tree Representation in Java
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/binary-tree-representation/1
+Problem Name: Binary Tree Representation
+Description: Build a binary tree representation. Return root.
 
 Folder: Binary_Trees
-File: 298_Binary_Tree_Representation_in_Java.md
+File: 298_Binary_Tree_Representation_in_Java.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(N)
+def optimal_solution(arr: list[int]) -> TreeNode:
+    if not arr:
+        return None
+    root = TreeNode(arr[0])
+    queue = [root]
+    i = 1
+    while i < len(arr):
+        curr = queue.pop(0)
+        if i < len(arr):
+            curr.left = TreeNode(arr[i])
+            queue.append(curr.left)
+            i += 1
+        if i < len(arr):
+            curr.right = TreeNode(arr[i])
+            queue.append(curr.right)
+            i += 1
+    return root
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Binary Tree Representation in Java...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = optimal_solution([1, 2, 3, 4, 5])
+    assert root.val == 1
+    assert root.left.val == 2
+    assert root.right.val == 3
     print("Done.")

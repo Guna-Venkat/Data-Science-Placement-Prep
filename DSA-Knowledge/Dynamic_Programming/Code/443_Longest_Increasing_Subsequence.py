@@ -1,44 +1,31 @@
 """
-LeetCode Problem: https://leetcode.com/problems/longest-increasing-subsequence/
+LeetCode Link: https://leetcode.com/problems/longest-increasing-subsequence/
 Problem Name: Longest Increasing Subsequence
-Description: Find LIS using patience sorting / DP.
+Description: Length of longest strictly increasing subsequence.
 
 Folder: Dynamic_Programming
-File: 443_Longest_Increasing_Subsequence.md
+File: 443_Longest_Increasing_Subsequence.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N^2)
+# Space Complexity: O(N)
+def optimal_solution(nums: list[int]) -> int:
+    if not nums:
+        return 0
+    dp = [1] * len(nums)
+    for i in range(len(nums)):
+        for j in range(i):
+            if nums[i] > nums[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    return max(dp)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Longest Increasing Subsequence...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([10, 9, 2, 5, 3, 7, 101, 18]) == 4
     print("Done.")

@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Matrix Chain Multiplication Bottom UpDP 49
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
+Problem Name: Matrix Chain Multiplication (Bottom-Up)
+Description: Tabulation approach of MCM.
 
 Folder: Dynamic_Programming
-File: 451_Matrix_Chain_Multiplication_Bottom_UpDP_49.md
+File: 451_Matrix_Chain_Multiplication_Bottom_UpDP_49.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N^3)
+# Space Complexity: O(N^2)
+def optimal_solution(arr: list[int]) -> int:
+    n = len(arr)
+    dp = [[0] * n for _ in range(n)]
+    
+    # l is chain length
+    for l in range(2, n):
+        for i in range(1, n - l + 1):
+            j = i + l - 1
+            dp[i][j] = float('inf')
+            for k in range(i, j):
+                cost = dp[i][k] + dp[k+1][j] + arr[i-1] * arr[k] * arr[j]
+                dp[i][j] = min(dp[i][j], cost)
+                
+    return dp[1][n - 1]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Matrix Chain Multiplication Bottom UpDP 49...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([40, 20, 30, 10, 30]) == 26000
     print("Done.")

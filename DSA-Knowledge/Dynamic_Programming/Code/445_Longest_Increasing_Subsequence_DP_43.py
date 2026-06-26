@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Longest Increasing Subsequence DP 43
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/longest-increasing-subsequence/
+Problem Name: Longest Increasing Subsequence (Binary Search)
+Description: Compute LIS in O(N log N) time using binary search (piles / patience sorting).
 
 Folder: Dynamic_Programming
-File: 445_Longest_Increasing_Subsequence_DP_43.md
+File: 445_Longest_Increasing_Subsequence_DP_43.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+import bisect
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N log N)
+# Space Complexity: O(N)
+def optimal_solution(nums: list[int]) -> int:
+    sub = []
+    for num in nums:
+        idx = bisect.bisect_left(sub, num)
+        if idx == len(sub):
+            sub.append(num)
+        else:
+            sub[idx] = num
+    return len(sub)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Longest Increasing Subsequence DP 43...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([10, 9, 2, 5, 3, 7, 101, 18]) == 4
     print("Done.")

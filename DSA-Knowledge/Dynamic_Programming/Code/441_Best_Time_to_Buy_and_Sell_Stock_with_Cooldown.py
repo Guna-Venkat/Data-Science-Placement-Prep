@@ -1,44 +1,38 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
 Problem Name: Best Time to Buy and Sell Stock with Cooldown
-Description: Problem description goes here.
+Description: Maximize profit with cooldown of 1 day after sell.
 
 Folder: Dynamic_Programming
-File: 441_Best_Time_to_Buy_and_Sell_Stock_with_Cooldown.md
+File: 441_Best_Time_to_Buy_and_Sell_Stock_with_Cooldown.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(prices: list[int]) -> int:
+    if not prices:
+        return 0
+    # State tracking: buy[i], sell[i], cooldown[i]
+    # buy: max profit ending with buy (or hold buy)
+    # sell: max profit ending with sell
+    # cooldown: max profit in cooldown
+    buy = -prices[0]
+    sell = 0
+    cooldown = 0
+    for price in prices[1:]:
+        prev_sell = sell
+        sell = max(sell, buy + price)
+        buy = max(buy, cooldown - price)
+        cooldown = max(cooldown, prev_sell)
+    return sell
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Best Time to Buy and Sell Stock with Cooldown...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 2, 3, 0, 2]) == 3
     print("Done.")

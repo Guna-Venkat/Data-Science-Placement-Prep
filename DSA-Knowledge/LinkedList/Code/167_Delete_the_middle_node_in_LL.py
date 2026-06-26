@@ -1,44 +1,44 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Delete the middle node in LL
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+Problem Name: Delete the Middle Node of a Linked List
+Description: Delete the middle node of a linked list and return the modified head.
 
 Folder: LinkedList
-File: 167_Delete_the_middle_node_in_LL.md
+File: 167_Delete_the_middle_node_in_LL.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Tortoise and Hare with a pointer tracking the node before slow.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> ListNode:
+    if not head or not head.next:
+        return None
+        
+    prev = None
+    slow = head
+    fast = head
+    while fast and fast.next:
+        prev = slow
+        slow = slow.next
+        fast = fast.next.next
+        
+    prev.next = slow.next
+    return head
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Delete the middle node in LL...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3, ListNode(4))))
+    res = optimal_solution(head) # deletes 3
+    assert res.next.next.val == 4
     print("Done.")

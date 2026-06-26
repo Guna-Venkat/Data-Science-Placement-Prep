@@ -1,44 +1,36 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Find the length of the Linked List
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/count-nodes-of-linked-list/1
+Problem Name: Length of the Linked List
+Description: Find the number of nodes in a linked list.
 
 Folder: LinkedList
-File: 152_Find_the_length_of_the_Linked_List.md
+File: 152_Find_the_length_of_the_Linked_List.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> int:
+    length = 0
+    curr = head
+    while curr:
+        length += 1
+        curr = curr.next
+    return length
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Find the length of the Linked List...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = ListNode(1, ListNode(2, ListNode(3)))
+    assert optimal_solution(head) == 3
+    assert optimal_solution(None) == 0
     print("Done.")

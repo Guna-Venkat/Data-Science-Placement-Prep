@@ -1,44 +1,45 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/number-of-longest-increasing-subsequence/
 Problem Name: Number of Longest Increasing Subsequences
-Description: Problem description goes here.
+Description: Count number of LIS possible.
 
 Folder: Dynamic_Programming
-File: 449_Number_of_Longest_Increasing_Subsequences.md
+File: 449_Number_of_Longest_Increasing_Subsequences.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Keep dp[i] representing length of LIS ending at i, and count[i] representing total ways.
+# Time Complexity: O(N^2)
+# Space Complexity: O(N)
+def optimal_solution(nums: list[int]) -> int:
+    if not nums:
+        return 0
+    n = len(nums)
+    dp = [1] * n
+    count = [1] * n
+    
+    for i in range(n):
+        for j in range(i):
+            if nums[i] > nums[j]:
+                if dp[j] + 1 > dp[i]:
+                    dp[i] = dp[j] + 1
+                    count[i] = count[j]
+                elif dp[j] + 1 == dp[i]:
+                    count[i] += count[j]
+                    
+    max_len = max(dp)
+    ans = 0
+    for i in range(n):
+        if dp[i] == max_len:
+            ans += count[i]
+    return ans
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Number of Longest Increasing Subsequences...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 3, 5, 4, 7]) == 2
     print("Done.")

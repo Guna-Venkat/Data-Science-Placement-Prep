@@ -1,44 +1,46 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Post order Traversal of Binary Tree using 2 stack
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/binary-tree-postorder-traversal/
+Problem Name: Iterative Postorder Traversal using 2 Stacks
+Description: Postorder traversal using two stacks.
 
 Folder: Binary_Trees
-File: 306_Post_order_Traversal_of_Binary_Tree_using_2_stack.md
+File: 306_Post_order_Traversal_of_Binary_Tree_using_2_stack.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Push root to stack1. Pop stack1, push to stack2.
+# Push left child, then right child to stack1.
+# Pop all from stack2.
+# Time Complexity: O(N)
+# Space Complexity: O(N)
+def optimal_solution(root: TreeNode) -> list[int]:
+    if not root:
+        return []
+    res = []
+    s1 = [root]
+    s2 = []
+    while s1:
+        node = s1.pop()
+        s2.append(node)
+        if node.left: s1.append(node.left)
+        if node.right: s1.append(node.right)
+    while s2:
+        res.append(s2.pop().val)
+    return res
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Post order Traversal of Binary Tree using 2 stack...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(1, None, TreeNode(2, TreeNode(3)))
+    assert optimal_solution(root) == [3, 2, 1]
     print("Done.")

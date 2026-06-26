@@ -1,44 +1,42 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.geeksforgeeks.org/problems/introduction-to-doubly-linked-list/1
 Problem Name: Introduction to Doubly LL
-Description: Problem description goes here.
+Description: Convert an array of integers to a doubly linked list and return the head.
 
 Folder: LinkedList
-File: 154_Introduction_to_Doubly_LL.md
+File: 154_Introduction_to_Doubly_LL.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class DLLNode:
+    def __init__(self, val=0, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(N) for DLL creation
+def optimal_solution(arr: list[int]) -> DLLNode:
+    if not arr:
+        return None
+    head = DLLNode(arr[0])
+    curr = head
+    for i in range(1, len(arr)):
+        temp = DLLNode(arr[i])
+        curr.next = temp
+        temp.prev = curr
+        curr = temp
+    return head
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Introduction to Doubly LL...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    head = optimal_solution([1, 2, 3])
+    assert head.val == 1
+    assert head.next.val == 2
+    assert head.next.prev.val == 1
     print("Done.")

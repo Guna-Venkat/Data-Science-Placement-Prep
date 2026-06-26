@@ -1,54 +1,54 @@
 ID,Problem,Difficulty,Pattern,Status,Time_Complexity,Space_Complexity
-351,351_Introduction_to_Graph,,,,,
-352,352_Graph_Representation_C++,,,,,
-353,353_Graph_Representation_Java,,,,,
-354,354_Connected_Components,,,,,
-355,355_Traversal_Techniques,,,,,
-356,356_DFS,,,,,
-357,357_Number_of_provinces,,,,,
-358,358_Connected_Components_Problem_in_Matrix,,,,,
-359,359_Rotten_Oranges,,,,,
-360,360_Flood_fill_algorithm,,,,,
-361,361_Cycle_Detection_in_Undirected_Graph_bfs,,,,,
-362,362_Detect_a_cycle_in_an_undirected_graph_dfs,,,,,
-363,363_Distance_of_nearest_cell_having_one,,,,,
-364,364_Surrounded_Regions,,,,,
-365,365_Number_of_enclaves,,,,,
-366,366_Word_ladder_I,,,,,
-367,367_Word_ladder_II,,,,,
-368,368_Number_of_islands,,,,,
-369,369_Bipartite_Graph_DFS,,,,,
-370,370_Cycle_Detection_in_Directed_Graph_DFS,,,,,
-371,371_Topo_Sort,,,,,
-372,372_Topological_sort_or_Kahns_algorithm,,,,,
-373,373_Detect_a_cycle_in_a_directed_graph_BFS,,,,,
-374,374_Course_Schedule_I,,,,,
-375,375_Course_Schedule_II,,,,,
-376,376_Find_eventual_safe_states,,,,,
-377,377_Alien_Dictionary,,,,,
-378,378_Shortest_path_in_undirected_graph_with_unit_weights,,,,,
-379,379_Shortest_path_in_DAG,,,,,
-380,380_Djisktras_Algorithm,,,,,
-381,381_Why_priority_Queue_is_used_in_Djisktras_Algorithm,,,,,
-382,382_Shortest_Distance_in_a_Binary_Maze,,,,,
-383,383_Path_with_minimum_effort,,,,,
-384,384_Cheapest_flight_within_K_stops,,,,,
-385,385_Network_Delay_Time,,,,,
-386,386_Number_of_ways_to_arrive_at_destination,,,,,
-387,387_Minimum_multiplications_to_reach_end,,,,,
-388,388_Bellman_Ford_Algorithm,,,,,
-389,389_Floyd_warshall_algorithm,,,,,
-390,390_Find_the_city_with_the_smallest_number_of_neighbors,,,,,
-391,391_MST_theory,,,,,
-392,392_Prims_Algorithm,,,,,
-393,393_Disjoint_Set,,,,,
-394,394_Find_the_MST_weight,,,,,
-395,395_Number_of_operations_to_make_network_connected,,,,,
-396,396_Most_stones_removed_with_same_row_or_column,,,,,
-397,397_Accounts_merge,,,,,
-398,398_Number_of_islands_II,,,,,
-399,399_Making_a_large_island,,,,,
-400,400_Swim_in_Rising_Water,,,,,
-401,401_Bridges_in_graph,,,,,
-402,402_Articulation_point_in_graph,,,,,
-403,403_Kosarajus_algorithm,,,,,
+351,351_Introduction_to_Graph,Easy,Properties,Completed,O(1),O(1)
+352,352_Graph_Representation_C++,Easy,Representation,Completed,O(V + E),O(V + E)
+353,353_Graph_Representation_Java,Easy,Representation,Completed,O(V + E),O(V + E)
+354,354_Connected_Components,Easy,DFS / Components,Completed,O(V + E),O(V)
+355,355_Traversal_Techniques,Easy,BFS,Completed,O(V + E),O(V)
+356,356_DFS,Easy,DFS,Completed,O(V + E),O(V)
+357,357_Number_of_provinces,Medium,DFS / Components,Completed,O(V^2),O(V)
+358,358_Connected_Components_Problem_in_Matrix,Medium,DFS / Matrix,Completed,O(R * C),O(R * C)
+359,359_Rotten_Oranges,Medium,BFS / Rotten Oranges,Completed,O(R * C),O(R * C)
+360,360_Flood_fill_algorithm,Easy,DFS / Flood Fill,Completed,O(R * C),O(R * C)
+361,361_Cycle_Detection_in_Undirected_Graph_bfs,Medium,BFS / Cycle,Completed,O(V + E),O(V)
+362,362_Detect_a_cycle_in_an_undirected_graph_dfs,Medium,DFS / Cycle,Completed,O(V + E),O(V)
+363,363_Distance_of_nearest_cell_having_one,Medium,BFS / 01 Matrix,Completed,O(R * C),O(R * C)
+364,364_Surrounded_Regions,Medium,Boundary DFS / Capture,Completed,O(R * C),O(R * C)
+365,365_Number_of_enclaves,Medium,DFS / Enclaves,Completed,O(R * C),O(R * C)
+366,366_Word_ladder_I,Hard,BFS / Word Ladder,Completed,O(N * L * 26),O(N)
+367,367_Word_ladder_II,Hard,BFS / Word Ladder,Completed,O(N * L * 26 + Paths),O(N * L)
+368,368_Number_of_islands,Medium,DFS / Matrix,Completed,O(R * C),O(R * C)
+369,369_Bipartite_Graph_DFS,Medium,DFS coloring / Bipartite,Completed,O(V + E),O(V)
+370,370_Cycle_Detection_in_Directed_Graph_DFS,Medium,DFS path / Cycle,Completed,O(V + E),O(V)
+371,371_Topo_Sort,Medium,DFS / Topo Sort,Completed,O(V + E),O(V)
+372,372_Topological_sort_or_Kahns_algorithm,Medium,BFS Kahn's / Topo Sort,Completed,O(V + E),O(V)
+373,373_Detect_a_cycle_in_a_directed_graph_BFS,Medium,BFS Kahn's / Cycle,Completed,O(V + E),O(V)
+374,374_Course_Schedule_I,Medium,BFS Kahn's / Topo Sort,Completed,O(V + E),O(V + E)
+375,375_Course_Schedule_II,Medium,BFS Kahn's / Topo Sort,Completed,O(V + E),O(V + E)
+376,376_Find_eventual_safe_states,Medium,BFS Kahn's / Safe States,Completed,O(V + E),O(V + E)
+377,377_Alien_Dictionary,Hard,BFS Kahn's / Alien dict,Completed,O(N * L + K),O(K)
+378,378_Shortest_path_in_undirected_graph_with_unit_weights,Medium,BFS / Shortest path,Completed,O(V + E),O(V)
+379,379_Shortest_path_in_DAG,Medium,Topo sort / DAG path,Completed,O(V + E),O(V)
+380,380_Djisktras_Algorithm,Medium,Dijkstra / Min Heap,Completed,O(E log V),O(V)
+381,381_Why_priority_Queue_is_used_in_Djisktras_Algorithm,Easy,Concept verification,Completed,O(1),O(1)
+382,382_Shortest_Distance_in_a_Binary_Maze,Medium,BFS / Maze,Completed,O(R * C),O(R * C)
+383,383_Path_with_minimum_effort,Medium,Dijkstra / Effort maze,Completed,O(R * C log (R * C)),O(R * C)
+384,384_Cheapest_flight_within_K_stops,Medium,BFS / Flight stops,Completed,O(E * K),O(V)
+385,385_Network_Delay_Time,Medium,Dijkstra,Completed,O(E log V),O(V)
+386,386_Number_of_ways_to_arrive_at_destination,Hard,Dijkstra / Shortest paths count,Completed,O(E log V),O(V)
+387,387_Minimum_multiplications_to_reach_end,Medium,BFS mod 100000,Completed,O(MOD),O(MOD)
+388,388_Bellman_Ford_Algorithm,Medium,Bellman-Ford,Completed,O(V * E),O(V)
+389,389_Floyd_warshall_algorithm,Medium,Floyd-Warshall,Completed,O(V^3),O(1)
+390,390_Find_the_city_with_the_smallest_number_of_neighbors,Medium,Floyd-Warshall / City reach,Completed,O(V^3),O(V^2)
+391,391_MST_theory,Easy,MST Concept,Completed,O(1),O(1)
+392,392_Prims_Algorithm,Medium,Prim's / MST,Completed,O(E log V),O(V)
+393,393_Disjoint_Set,Medium,Union-Find class,Completed,O(alpha(N)),O(N)
+394,394_Find_the_MST_weight,Medium,Kruskal's / MST,Completed,O(E log E),O(V)
+395,395_Number_of_operations_to_make_network_connected,Medium,Union-Find / Network split,Completed,O(E alpha(V)),O(V)
+396,396_Most_stones_removed_with_same_row_or_column,Medium,Union-Find / Stones,Completed,O(N alpha(max_idx)),O(max_idx)
+397,397_Accounts_merge,Medium,Union-Find / Account Merge,Completed,O(N log N),O(Emails)
+398,398_Number_of_islands_II,Medium,Union-Find / Dynamic Islands,Completed,O(Q alpha(R * C)),O(R * C)
+399,399_Making_a_large_island,Hard,DFS component / Large Island,Completed,O(N^2),O(N^2)
+400,400_Swim_in_Rising_Water,Hard,Dijkstra / Swim elevation,Completed,O(N^2 log N),O(N^2)
+401,401_Bridges_in_graph,Hard,Tarjan's DFS / Bridges,Completed,O(V + E),O(V)
+402,402_Articulation_point_in_graph,Hard,Tarjan's DFS / Articulation,Completed,O(V + E),O(V)
+403,403_Kosarajus_algorithm,Hard,Kosaraju's DFS / SCC,Completed,O(V + E),O(V)

@@ -1,44 +1,33 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Requirements needed to construct a unique BT
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/unique-binary-tree-requirements/1
+Problem Name: Unique Binary Tree Requirements
+Description: Given two traversals, determine if they can form a unique binary tree.
 
 Folder: Binary_Trees
-File: 328_Requirements_needed_to_construct_a_unique_BT.md
+File: 328_Requirements_needed_to_construct_a_unique_BT.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: A unique binary tree can be constructed if one traversal is INORDER, 
+# and the other is either PREORDER or POSTORDER.
+# Code representation: 1 = Preorder, 2 = Inorder, 3 = Postorder.
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+def optimal_solution(t1: int, t2: int) -> bool:
+    # 2 represents Inorder. We need Inorder along with Preorder (1) or Postorder (3)
+    if (t1 == 2 and t2 == 1) or (t1 == 1 and t2 == 2):
+        return True
+    if (t1 == 2 and t2 == 3) or (t1 == 3 and t2 == 2):
+        return True
+    return False
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Requirements needed to construct a unique BT...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(2, 1) == True
+    assert optimal_solution(1, 3) == False
     print("Done.")

@@ -1,44 +1,52 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/string-to-integer-atoi/
 Problem Name: Recursive Implementation of atoi
-Description: Problem description goes here.
+Description: Convert a string to an integer recursively.
 
 Folder: Recursion
-File: 180_Recursive_Implementation_of_atoi.md
+File: 180_Recursive_Implementation_of_atoi.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(N) recursion stack
+def optimal_solution(s: str) -> int:
+    s = s.strip()
+    if not s:
+        return 0
+        
+    sign = 1
+    if s[0] == '-':
+        sign = -1
+        s = s[1:]
+    elif s[0] == '+':
+        s = s[1:]
+        
+    INT_MAX = 2**31 - 1
+    INT_MIN = -2**31
+    
+    def convert(idx, current_val):
+        if idx >= len(s) or not s[idx].isdigit():
+            return current_val
+        digit = int(s[idx])
+        new_val = current_val * 10 + digit
+        # Overflow checks
+        if sign * new_val > INT_MAX:
+            return INT_MAX
+        if sign * new_val < INT_MIN:
+            return INT_MIN
+        return convert(idx + 1, new_val)
+
+    return sign * convert(0, 0)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Recursive Implementation of atoi...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("42") == 42
+    assert optimal_solution("   -42") == -42
+    assert optimal_solution("4193 with words") == 4193
     print("Done.")

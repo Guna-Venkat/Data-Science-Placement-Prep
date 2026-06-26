@@ -1,44 +1,41 @@
 """
-LeetCode Problem: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
-Problem Name: LCA in BT
-Description: Find LCA of two nodes in a binary tree.
+LeetCode Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+Problem Name: Lowest Common Ancestor of a Binary Tree
+Description: Find the LCA of two nodes p and q in a binary tree.
 
 Folder: Binary_Trees
-File: 322_LCA_in_BT.md
+File: 322_LCA_in_BT.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(H)
+def optimal_solution(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    if not root or root == p or root == q:
+        return root
+        
+    left = optimal_solution(root.left, p, q)
+    right = optimal_solution(root.right, p, q)
+    
+    if left and right:
+        return root
+    return left or right
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for LCA in BT...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    p = TreeNode(5)
+    q = TreeNode(1)
+    root = TreeNode(3, p, q)
+    assert optimal_solution(root, p, q) == root
     print("Done.")

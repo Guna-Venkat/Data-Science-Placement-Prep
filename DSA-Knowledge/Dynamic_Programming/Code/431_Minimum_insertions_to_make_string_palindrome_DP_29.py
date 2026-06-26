@@ -1,44 +1,37 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Minimum insertions to make string palindrome DP 29
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
+Problem Name: Minimum Insertions to Make String Palindrome
+Description: Return minimum insertions to make string a palindrome.
 
 Folder: Dynamic_Programming
-File: 431_Minimum_insertions_to_make_string_palindrome_DP_29.md
+File: 431_Minimum_insertions_to_make_string_palindrome_DP_29.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Result is len(s) - Longest Palindromic Subsequence(s).
+# Time Complexity: O(N^2)
+# Space Complexity: O(N)
+def optimal_solution(s: str) -> int:
+    n = len(s)
+    rev = s[::-1]
+    dp = [0] * (n + 1)
+    for char in s:
+        next_dp = [0] * (n + 1)
+        for j in range(1, n + 1):
+            if char == rev[j - 1]:
+                next_dp[j] = 1 + dp[j - 1]
+            else:
+                next_dp[j] = max(dp[j], next_dp[j - 1])
+        dp = next_dp
+    return n - dp[n]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Minimum insertions to make string palindrome DP 29...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("zzazz") == 0
+    assert optimal_solution("mbadm") == 2
     print("Done.")

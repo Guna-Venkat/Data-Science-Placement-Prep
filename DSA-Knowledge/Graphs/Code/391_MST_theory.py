@@ -1,44 +1,22 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: MST theory
-Description: Problem description goes here.
+LeetCode Link: N/A
+Problem Name: Minimum Spanning Tree Theory
+Description: Conceptual verification of MST vertices and edges properties.
 
 Folder: Graphs
-File: 391_MST_theory.md
+File: 391_MST_theory.py
 """
 
 # ============================================
-# BRUTE FORCE APPROACH
+# CONCEPT
 # ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+# For connected undirected graph G with V vertices:
+# MST contains V vertices and V - 1 edges. No cycles.
+def verify():
+    # If V=3, MST contains 2 edges.
+    assert 3 - 1 == 2
 
-# ============================================
-# OPTIMAL APPROACH
-# ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
-
-# ============================================
-# TEST CASES (Run this file to verify)
-# ============================================
 if __name__ == "__main__":
-    print(f"Running tests for MST theory...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    verify()
     print("Done.")

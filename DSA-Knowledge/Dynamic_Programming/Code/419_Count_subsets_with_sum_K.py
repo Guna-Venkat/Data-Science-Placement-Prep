@@ -1,44 +1,30 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Count subsets with sum K
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1
+Problem Name: Count Subsets with Sum K
+Description: Count number of subsets that sum to K.
 
 Folder: Dynamic_Programming
-File: 419_Count_subsets_with_sum_K.md
+File: 419_Count_subsets_with_sum_K.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N * K)
+# Space Complexity: O(K)
+def optimal_solution(arr: list[int], k: int) -> int:
+    dp = [0] * (k + 1)
+    dp[0] = 1
+    
+    for num in arr:
+        for t in range(k, num - 1, -1):
+            dp[t] += dp[t - num]
+    return dp[k]
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Count subsets with sum K...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 2, 2, 3], 3) == 3
     print("Done.")

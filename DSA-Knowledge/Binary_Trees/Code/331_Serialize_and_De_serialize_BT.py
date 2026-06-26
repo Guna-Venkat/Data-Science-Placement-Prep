@@ -1,44 +1,56 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Serialize and De serialize BT
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+Problem Name: Serialize and Deserialize Binary Tree
+Description: Convert binary tree to string and back.
 
 Folder: Binary_Trees
-File: 331_Serialize_and_De_serialize_BT.md
+File: 331_Serialize_and_De_serialize_BT.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(N)
+class Codec:
+    def serialize(self, root: TreeNode) -> str:
+        if not root:
+            return "#"
+        return f"{root.val},{self.serialize(root.left)},{self.serialize(root.right)}"
+
+    def deserialize(self, data: str) -> TreeNode:
+        vals = data.split(",")
+        idx = 0
+        
+        def build():
+            nonlocal idx
+            if vals[idx] == "#":
+                idx += 1
+                return None
+            root = TreeNode(int(vals[idx]))
+            idx += 1
+            root.left = build()
+            root.right = build()
+            return root
+            
+        return build()
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Serialize and De serialize BT...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    root = TreeNode(1, TreeNode(2), TreeNode(3))
+    codec = Codec()
+    serialized = codec.serialize(root)
+    deserialized = codec.deserialize(serialized)
+    assert deserialized.val == 1
+    assert deserialized.left.val == 2
+    assert deserialized.right.val == 3
     print("Done.")

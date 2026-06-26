@@ -1,44 +1,53 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Find the starting point in LL
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/linked-list-cycle-ii/
+Problem Name: Find starting point of loop in Linked List
+Description: Find the node where the cycle begins. Return None if no cycle.
 
 Folder: LinkedList
-File: 162_Find_the_starting_point_in_LL.md
+File: 162_Find_the_starting_point_in_LL.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: 
+# 1. Detect intersection point using Tortoise & Hare.
+# 2. Reset slow pointer to head. Move both pointers at equal speed (1 step). 
+#    They will meet at the starting point of the loop.
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(head: ListNode) -> ListNode:
+    slow = head
+    fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            # Cycle detected. Find start node.
+            slow = head
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next
+            return slow
+    return None
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Find the starting point in LL...")
+    print("Running tests...")
+    head = ListNode(3)
+    loop_node = ListNode(2)
+    head.next = loop_node
+    loop_node.next = ListNode(0)
+    loop_node.next.next = ListNode(-4)
+    loop_node.next.next.next = loop_node # Loop points to node 2
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    res = optimal_solution(head)
+    assert res is not None and res.val == 2
     print("Done.")

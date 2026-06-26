@@ -1,44 +1,47 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Rotten Oranges
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/rotting-oranges/
+Problem Name: Rotting Oranges
+Description: Find minimum time to rot all fresh oranges. Return -1 if impossible.
 
 Folder: Graphs
-File: 359_Rotten_Oranges.md
+File: 359_Rotten_Oranges.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(R * C)
+# Space Complexity: O(R * C)
+def optimal_solution(grid: list[list[int]]) -> int:
+    rows, cols = len(grid), len(grid[0])
+    queue = []
+    fresh = 0
+    
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == 2:
+                queue.append((r, c, 0))
+            elif grid[r][c] == 1:
+                fresh += 1
+                
+    minutes = 0
+    while queue:
+        r, c, time = queue.pop(0)
+        minutes = max(minutes, time)
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1:
+                grid[nr][nc] = 2
+                fresh -= 1
+                queue.append((nr, nc, time + 1))
+                
+    return minutes if fresh == 0 else -1
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Rotten Oranges...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    grid = [[2,1,1],[1,1,0],[0,1,1]]
+    assert optimal_solution(grid) == 4
     print("Done.")

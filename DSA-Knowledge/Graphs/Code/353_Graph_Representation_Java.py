@@ -1,44 +1,27 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://www.codingninjas.com/studio/problems/creating-and-printing-graphs_1214969
 Problem Name: Graph Representation Java
-Description: Problem description goes here.
+Description: Build a directed adjacency list representation.
 
 Folder: Graphs
-File: 353_Graph_Representation_Java.md
+File: 353_Graph_Representation_Java.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+def optimal_solution(v: int, edges: list[tuple[int, int]]) -> dict[int, list[int]]:
+    adj = {i: [] for i in range(v)}
+    for u, w in edges:
+        adj[u].append(w)
+    return adj
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Graph Representation Java...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    adj = optimal_solution(3, [(0, 1), (1, 2)])
+    assert adj[0] == [1]
+    assert adj[1] == [2]
     print("Done.")

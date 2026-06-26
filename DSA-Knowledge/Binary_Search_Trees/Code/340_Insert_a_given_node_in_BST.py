@@ -1,44 +1,53 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Insert a given node in BST
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/insert-into-a-binary-search-tree/
+Problem Name: Insert into a Binary Search Tree
+Description: Insert a value into the BST and return the root of the modified BST.
 
 Folder: Binary_Search_Trees
-File: 340_Insert_a_given_node_in_BST.md
+File: 340_Insert_a_given_Node_in_BST.py
 """
 
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Move down the tree. If val < curr.val, go left; else go right.
+# Insert at the first encountered None location.
+# Time Complexity: O(H)
+# Space Complexity: O(1)
+def optimal_solution(root: TreeNode, val: int) -> TreeNode:
+    if not root:
+        return TreeNode(val)
+    curr = root
+    while True:
+        if val < curr.val:
+            if curr.left is None:
+                curr.left = TreeNode(val)
+                break
+            else:
+                curr = curr.left
+        else:
+            if curr.right is None:
+                curr.right = TreeNode(val)
+                break
+            else:
+                curr = curr.right
+    return root
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Insert a given node in BST...")
+    print("Running tests...")
+    root = TreeNode(4)
+    root.left = TreeNode(2, TreeNode(1), TreeNode(3))
+    root.right = TreeNode(7)
     
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    new_root = optimal_solution(root, 5)
+    assert new_root.right.left.val == 5
     print("Done.")

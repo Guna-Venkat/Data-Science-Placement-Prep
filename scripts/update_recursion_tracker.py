@@ -1,0 +1,41 @@
+import csv
+import os
+
+TRACKER_DATA = [
+    ["180", "180_Recursive_Implementation_of_atoi", "Medium", "Recursion", "Completed", "O(N)", "O(N)"],
+    ["181", "181_Powx_n", "Medium", "Binary Exponentiation", "Completed", "O(log n)", "O(log n)"],
+    ["182", "182_Count_Good_Numbers", "Medium", "Binary Exponentiation", "Completed", "O(log n)", "O(log n)"],
+    ["183", "183_Sort_a_stack_using_recursion", "Medium", "Stack Recursion", "Completed", "O(N^2)", "O(N)"],
+    ["184", "184_Reverse_a_Stack", "Medium", "Stack Recursion", "Completed", "O(N^2)", "O(N)"],
+    ["185", "185_Generate_Binary_Strings_Without_Consecutive_1s", "Medium", "Backtracking", "Completed", "O(2^K)", "O(K)"],
+    ["186", "186_Generate_Parentheses", "Medium", "Backtracking", "Completed", "O(4^n / sqrt(n))", "O(n)"],
+    ["187", "187_Power_Set", "Medium", "Backtracking", "Completed", "O(2^N * N)", "O(N)"],
+    ["188", "188_Learn_All_Patterns_of_Subsequences_Theory", "Medium", "Backtracking", "Completed", "O(2^N)", "O(N)"],
+    ["189", "189_Count_all_subsequences_with_sum_K", "Medium", "Backtracking", "Completed", "O(2^N)", "O(N)"],
+    ["190", "190_Check_if_there_exists_a_subsequence_with_sum_K", "Medium", "Backtracking", "Completed", "O(2^N)", "O(N)"],
+    ["191", "191_Combination_Sum", "Medium", "Backtracking", "Completed", "O(2^T * K)", "O(T)"],
+    ["192", "192_Combination_Sum_II", "Medium", "Backtracking", "Completed", "O(2^N * N)", "O(N)"],
+    ["193", "193_Subsets_I", "Easy", "Backtracking", "Completed", "O(2^N)", "O(N)"],
+    ["194", "194_Subsets_II", "Medium", "Backtracking", "Completed", "O(2^N * N)", "O(N)"],
+    ["195", "195_Combination_Sum_III", "Medium", "Backtracking", "Completed", "O(9! / (k! * (9-k)!))", "O(k)"],
+    ["196", "196_Letter_Combinations_of_a_Phone_Number", "Medium", "Backtracking", "Completed", "O(4^N * N)", "O(N)"],
+    ["197", "197_Palindrome_partitioning", "Medium", "Backtracking", "Completed", "O(2^N * N)", "O(N)"],
+    ["198", "198_Word_Search", "Medium", "Backtracking / DFS", "Completed", "O(R * C * 4^L)", "O(L)"],
+    ["199", "199_N_Queen", "Hard", "Backtracking", "Completed", "O(N!)", "O(N)"],
+    ["200", "200_Rat_in_a_Maze", "Medium", "Backtracking / DFS", "Completed", "O(3^(N^2))", "O(N^2)"],
+    ["201", "201_Word_Break", "Medium", "Memoized Backtracking", "Completed", "O(N^2)", "O(N)"],
+    ["202", "202_M_Coloring_Problem", "Medium", "Backtracking / DFS", "Completed", "O(M^V)", "O(V)"],
+    ["203", "203_Sudoku_Solver", "Hard", "Backtracking", "Completed", "O(9^(N^2))", "O(1)"],
+    ["204", "204_Expression_Add_Operators", "Hard", "Backtracking", "Completed", "O(4^N)", "O(N)"]
+]
+
+def main():
+    filepath = os.path.join(".", "DSA-Knowledge", "Recursion", "tracker.csv")
+    with open(filepath, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["ID", "Problem", "Difficulty", "Pattern", "Status", "Time_Complexity", "Space_Complexity"])
+        writer.writerows(TRACKER_DATA)
+    print(f"Updated {filepath} successfully with comprehensive Recursion data!")
+
+if __name__ == "__main__":
+    main()

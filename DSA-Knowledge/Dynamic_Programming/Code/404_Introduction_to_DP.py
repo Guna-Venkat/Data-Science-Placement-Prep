@@ -1,44 +1,32 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Introduction to DP
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/fibonacci-number/
+Problem Name: Introduction to DP (Fibonacci)
+Description: Compute Fibonacci number using memoization and space-optimized tabulation.
 
 Folder: Dynamic_Programming
-File: 404_Introduction_to_DP.md
+File: 404_Introduction_to_DP.py
 """
 
 # ============================================
-# BRUTE FORCE APPROACH
+# OPTIMAL APPROACH (Space Optimized)
 # ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(n: int) -> int:
+    if n <= 1:
+        return n
+    prev2, prev = 0, 1
+    for _ in range(2, n + 1):
+        curr = prev + prev2
+        prev2 = prev
+        prev = curr
+    return prev
 
 # ============================================
-# OPTIMAL APPROACH
-# ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
-
-# ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Introduction to DP...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(5) == 5
+    assert optimal_solution(10) == 55
     print("Done.")

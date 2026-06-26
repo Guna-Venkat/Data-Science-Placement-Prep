@@ -1,44 +1,35 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/longest-string-chain/
 Problem Name: Longest String Chain
-Description: Problem description goes here.
+Description: Longest chain of strings where words[i] can be formed by adding 1 char to words[i-1].
 
 Folder: Dynamic_Programming
-File: 447_Longest_String_Chain.md
+File: 447_Longest_String_Chain.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Sort words by length. Use map dp[word] representing chain length ending at word.
+# Time Complexity: O(N * L^2) where L is max word length
+# Space Complexity: O(N)
+def optimal_solution(words: list[str]) -> int:
+    words.sort(key=len)
+    dp = {}
+    max_chain = 1
+    for word in words:
+        dp[word] = 1
+        for i in range(len(word)):
+            prev = word[:i] + word[i+1:]
+            if prev in dp:
+                dp[word] = max(dp[word], dp[prev] + 1)
+        max_chain = max(max_chain, dp[word])
+    return max_chain
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Longest String Chain...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution(["a","b","ba","bca","bda","bdca"]) == 4
     print("Done.")

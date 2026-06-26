@@ -1,44 +1,44 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Cycle Detection in Undirected Graph bfs
-Description: Problem description goes here.
+LeetCode Link: https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
+Problem Name: Cycle Detection Undirected Graph (BFS)
+Description: Detect cycle in undirected graph using BFS (parent mapping).
 
 Folder: Graphs
-File: 361_Cycle_Detection_in_Undirected_Graph_bfs.md
+File: 361_Cycle_Detection_in_Undirected_Graph_bfs.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(V + E)
+# Space Complexity: O(V)
+def optimal_solution(v: int, adj: list[list[int]]) -> bool:
+    visited = [False] * v
+    
+    def check_cycle(src):
+        visited[src] = True
+        queue = [(src, -1)] # (node, parent)
+        while queue:
+            node, parent = queue.pop(0)
+            for neighbor in adj[node]:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    queue.append((neighbor, node))
+                elif neighbor != parent:
+                    return True
+        return False
+        
+    for i in range(v):
+        if not visited[i]:
+            if check_cycle(i):
+                return True
+    return False
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Cycle Detection in Undirected Graph bfs...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    adj = [[1], [0, 2, 3], [1, 3], [1, 2]] # cycle 1-2-3-1
+    assert optimal_solution(4, adj) == True
     print("Done.")

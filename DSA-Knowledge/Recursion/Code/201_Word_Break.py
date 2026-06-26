@@ -1,44 +1,43 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
+LeetCode Link: https://leetcode.com/problems/word-break/
 Problem Name: Word Break
-Description: Problem description goes here.
+Description: Check if a string can be segmented into dictionary words.
 
 Folder: Recursion
-File: 201_Word_Break.md
+File: 201_Word_Break.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Key Insight: Backtracking with Memoization.
+# Time Complexity: O(N^2)
+# Space Complexity: O(N)
+def optimal_solution(s: str, wordDict: list[str]) -> bool:
+    words = set(wordDict)
+    memo = {}
+    
+    def solve(idx):
+        if idx == len(s):
+            return True
+        if idx in memo:
+            return memo[idx]
+            
+        for i in range(idx, len(s)):
+            if s[idx:i+1] in words:
+                if solve(i + 1):
+                    memo[idx] = True
+                    return True
+        memo[idx] = False
+        return False
+
+    return solve(0)
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Word Break...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution("leetcode", ["leet", "code"]) == True
+    assert optimal_solution("catsandog", ["cats", "dog", "sand", "and", "cat"]) == False
     print("Done.")

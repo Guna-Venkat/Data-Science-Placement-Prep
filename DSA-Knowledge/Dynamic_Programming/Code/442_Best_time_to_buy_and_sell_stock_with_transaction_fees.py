@@ -1,44 +1,31 @@
 """
-LeetCode Problem: https://leetcode.com/problems/.../
-Problem Name: Best time to buy and sell stock with transaction fees
-Description: Problem description goes here.
+LeetCode Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
+Problem Name: Best Time to Buy and Sell Stock with Transaction Fee
+Description: Maximize profit with transaction fee per transaction.
 
 Folder: Dynamic_Programming
-File: 442_Best_time_to_buy_and_sell_stock_with_transaction_fees.md
+File: 442_Best_time_to_buy_and_sell_stock_with_transaction_fees.py
 """
-
-# ============================================
-# BRUTE FORCE APPROACH
-# ============================================
-# Idea: [Explain brute force logic here]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def brute_force_solution():
-    # TODO: Implement brute force
-    pass
 
 # ============================================
 # OPTIMAL APPROACH
 # ============================================
-# Key Insight: [Explain the main trick/efficiency]
-# Time Complexity: O(?)
-# Space Complexity: O(?)
-def optimal_solution():
-    # TODO: Implement optimal solution
-    pass
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+def optimal_solution(prices: list[int], fee: int) -> int:
+    # hold: max profit holding stock
+    # free: max profit not holding stock
+    hold = -prices[0]
+    free = 0
+    for price in prices[1:]:
+        free = max(free, hold + price - fee)
+        hold = max(hold, free - price)
+    return free
 
 # ============================================
-# TEST CASES (Run this file to verify)
+# TEST CASES
 # ============================================
 if __name__ == "__main__":
-    print(f"Running tests for Best time to buy and sell stock with transaction fees...")
-    
-    # Test Case 1: [Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
-    # Test Case 2: [Edge Case Description]
-    # Expected Output: [Value]
-    # print(optimal_solution(...))
-    
+    print("Running tests...")
+    assert optimal_solution([1, 3, 2, 8, 4, 9], 2) == 8
     print("Done.")
